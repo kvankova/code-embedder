@@ -1,6 +1,7 @@
 #!/bin/sh -l
 git add entrypoint.sh
 git update-index --chmod=+x entrypoint.sh
+git config --global --add safe.directory /github/workspace
 
 README_PATH=${1:-README.md}
 
@@ -13,12 +14,13 @@ python3 main.py
 if [ -n "$(git status -s)" ]; then  # Use [ ] instead of [[ ]]
     git config --global user.name "github-actions"
     git config --global user.email "github-actions@github.com"
-    git config --global --add safe.directory /github/workspace
 
     # Ensure we're in the correct directory
     cd "$GITHUB_WORKSPACE"  # This is the default location for the checked out repo
 
     git add "$README_PATH"
+
+    git diff README.md
 
     # Check if there are changes to commit
     if ! git diff-index --quiet HEAD --; then
