@@ -7,14 +7,17 @@ ENV GITHUB_SHA=${GITHUB_SHA}
 WORKDIR /app
 
 RUN apt-get update \
-    && pip install poetry==1.8.4
+    && pip install poetry==1.8.4 \
+    && apt-get install -y --no-install-recommends git
 
 RUN poetry config virtualenvs.create false
 
 COPY . /app/
 
+RUN chmod +x /app/entrypoint.sh
+
 ENV PATH="$POETRY_HOME/bin:$PATH"
 
 RUN poetry install
 
-ENTRYPOINT ["poetry", "run", "python", "/app/main.py"]
+ENTRYPOINT ["/app/entrypoint.sh"]

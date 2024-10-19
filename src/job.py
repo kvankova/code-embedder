@@ -1,4 +1,3 @@
-from pathlib import Path
 
 def find_embed_lines(readme_path, lookup_string):
     embed_lines = []
@@ -38,7 +37,6 @@ def replace_embeds_in_readme(readme_path, embed_dict, lookup_string):
     inside_replacement_script = False
     # Loop through each line in the README.md
     for line in readme_content:
-        print(line)
         if line.startswith(lookup_string):
             updated_lines.append(line)
             inside_replacement_script = True
@@ -49,8 +47,7 @@ def replace_embeds_in_readme(readme_path, embed_dict, lookup_string):
                 script_content = embed_dict[embed_path]
                 # Add the script content as a code block after the embed tag
                 updated_lines.append(f"{script_content}")
-        elif line.startswith('```') and inside_replacement_script:
-            updated_lines.append("\n")
+        elif line.startswith('```'):
             updated_lines.append(line)
             inside_replacement_script = False 
         elif not inside_replacement_script:
@@ -60,5 +57,7 @@ def replace_embeds_in_readme(readme_path, embed_dict, lookup_string):
     # Write the updated content back to README.md
     with open(readme_path, 'w') as readme_file:
         readme_file.writelines(updated_lines)
+
+    print("README.md looks like this:", "\n".join(updated_lines))
 
     print("README.md updated successfully.")
