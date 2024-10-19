@@ -14,4 +14,4 @@ runs:
   using: docker
   image: Dockerfile
   args:
-    - ${{ inputs.readme_path }}
+    - ${{ inputs.readme_path || 'README.md' }}
