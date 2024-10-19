@@ -13,6 +13,7 @@ python3 main.py
 if [ -n "$(git status -s)" ]; then  # Use [ ] instead of [[ ]]
     git config --global user.name "github-actions"
     git config --global user.email "github-actions@github.com"
+    git config --global --add safe.directory /github/workspace
 
     # Ensure we're in the correct directory
     cd "$GITHUB_WORKSPACE"  # This is the default location for the checked out repo
