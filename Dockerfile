@@ -1,0 +1,9 @@
+FROM alpine:3.10
+
+ENV GITHUB_TOKEN=${GITHUB_TOKEN}
+ENV GITHUB_REPOSITORY=${GITHUB_REPOSITORY}
+ENV GITHUB_SHA=${GITHUB_SHA}
+
+COPY main.py /app/main.py
+
+ENTRYPOINT ["python3", "/app/main.py"]

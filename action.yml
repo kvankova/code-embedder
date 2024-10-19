@@ -1,0 +1,17 @@
+name: "Code Embedder"
+description: "This is an action that updates README with up-to-date code snippets."
+author: Katerina Vankova
+branding:
+  icon: "activity"
+  color: "blue"
+
+inputs:
+  readme_path:
+    description: "Path to Readme. By default, it finds it in the root."
+    required: false
+
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.readme_path }}
