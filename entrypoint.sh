@@ -1,8 +1,9 @@
 #!/bin/sh -l
 set -xe 
 git config --global --add safe.directory /github/workspace
-
 git update-index --chmod=+x entrypoint.sh
+git remote set-url origin https://x-access-token:$EMBED_TOKEN@github.com/$GITHUB_REPOSITORY.git
+git fetch origin 
 
 README_PATH=${1:-README.md}
 BRANCH_NAME=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
@@ -22,7 +23,7 @@ if [ -n "$(git status -s)" ]; then  # Use [ ] instead of [[ ]]
     git add "$README_PATH"    
     git diff --staged
     echo "Pushing changes..."
-    git remote set-url origin https://x-access-token:$EMBED_TOKEN@github.com/$GITHUB_REPOSITORY.git
+    
     git commit -m "Update $README_PATH"
     git push origin HEAD:refs/heads/$BRANCH_NAME
 else
