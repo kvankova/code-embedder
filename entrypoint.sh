@@ -1,8 +1,8 @@
 #!/bin/sh -l
 set -xe 
+git config --global --add safe.directory /github/workspace
 
 git update-index --chmod=+x entrypoint.sh
-git config --global --add safe.directory /github/workspace
 
 README_PATH=${1:-README.md}
 
