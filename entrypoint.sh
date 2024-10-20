@@ -25,7 +25,7 @@ if [ -n "$(git status -s)" ]; then
     echo "Pushing changes..."
     
     git commit -m "Update $README_PATH"
-    git push
+    git push origin ${BRANCH_NAME}
 else
     echo "No changes to commit."
 fi
