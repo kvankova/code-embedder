@@ -1,7 +1,6 @@
 #!/bin/sh -l
 set -xe 
 
-git add entrypoint.sh
 git update-index --chmod=+x entrypoint.sh
 git config --global --add safe.directory /github/workspace
 
