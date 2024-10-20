@@ -16,9 +16,7 @@ python3 main.py
 if [ -n "$(git status -s)" ]; then  # Use [ ] instead of [[ ]]
     git config --global user.name "github-actions"
     git config --global user.email "github-actions@github.com"
-    echo "Changes to commit:"
     git add "$README_PATH"
-    git remote set-url origin https://x-access-token:${{ secrets.EMBED_TOKEN }}@github.com/${{ github.repository }}
     echo "Pushing changes..."
     git commit -m "Update $README_PATH"
     git push origin HEAD 

@@ -58,6 +58,4 @@ def replace_embeds_in_readme(readme_path, embed_dict, lookup_string):
     with open(readme_path, 'w') as readme_file:
         readme_file.writelines(updated_lines)
 
-    print("README.md looks like this:", "\n".join(updated_lines))
-
     print("README.md updated successfully.")
