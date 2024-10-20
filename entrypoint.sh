@@ -15,6 +15,8 @@ echo "Updating $README_PATH with code snippets..."
 
 python3 main.py 
 
+git branch --show-current
+
 # Check if there are changes to commit
 if [ -n "$(git status -s)" ]; then  
     git add "$README_PATH"    
