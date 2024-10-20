@@ -8,7 +8,9 @@ WORKDIR /app
 
 RUN apt-get update \
     && pip install poetry==1.8.4 \
-    && apt-get install -y --no-install-recommends git
+    && apt-get install -y --no-install-recommends git ssh-client \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN poetry config virtualenvs.create false
 

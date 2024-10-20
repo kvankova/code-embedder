@@ -1,7 +1,6 @@
 name: code-embedder-example
 
-on:
-  push:
+on: pull_request
 
 jobs:
   code-embedder-example:
@@ -13,7 +12,7 @@ jobs:
 
       - name: Code Embedder
         uses: ./
-        env:
+        with:
           EMBED_TOKEN: ${{ secrets.EMBED_TOKEN }}
       
 
