@@ -47,7 +47,8 @@ def replace_embeds_in_readme(readme_path, embed_dict, lookup_string):
                 script_content = embed_dict[embed_path]
                 # Add the script content as a code block after the embed tag
                 updated_lines.append(f"{script_content}")
-        elif line.startswith('```'):
+        elif line.startswith('```') & inside_replacement_script:
+            updated_lines.append('\n')
             updated_lines.append(line)
             inside_replacement_script = False 
         elif not inside_replacement_script:
