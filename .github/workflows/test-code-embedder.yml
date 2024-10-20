@@ -13,6 +13,6 @@ jobs:
       - name: Code Embedder
         uses: ./
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EMBED_TOKEN: ${{ secrets.EMBED_TOKEN }}
       
 
