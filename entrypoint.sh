@@ -5,13 +5,14 @@ git config --global --add safe.directory /github/workspace
 git update-index --chmod=+x entrypoint.sh
 
 README_PATH=${1:-README.md}
+BRANCH_NAME=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
 
 # Update the README file as needed
 echo "Updating $README_PATH with code snippets..."
 
 python3 main.py 
 
-git checkout $GITHUB_REF_NAME
+git checkout $BRANCH_NAME
 git pull
 
 # Check if there are changes to commit
@@ -23,7 +24,7 @@ if [ -n "$(git status -s)" ]; then  # Use [ ] instead of [[ ]]
     echo "Pushing changes..."
     git remote set-url origin https://x-access-token:$EMBED_TOKEN@github.com/$GITHUB_REPOSITORY.git
     git commit -m "Update $README_PATH"
-    git push origin HEAD
+    git push origin HEAD:refs/heads/$BRANCH_NAME
 else
     echo "No changes to commit."
 fi
