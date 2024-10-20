@@ -15,5 +15,7 @@ jobs:
         uses: ./
         env:
           EMBED_TOKEN: ${{ secrets.EMBED_TOKEN }}
+        permissions:
+          contents: write
       
 
