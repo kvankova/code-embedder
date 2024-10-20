@@ -23,7 +23,7 @@ if [ -n "$(git status -s)" ]; then  # Use [ ] instead of [[ ]]
     echo "Pushing changes..."
     git remote set-url origin https://x-access-token:$EMBED_TOKEN@github.com/$GITHUB_REPOSITORY.git
     git commit -m "Update $README_PATH"
-    git push origin HEAD:refs/heads/$GITHUB_REF_NAME
+    git push origin HEAD
 else
     echo "No changes to commit."
 fi
