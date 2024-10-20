@@ -8,6 +8,8 @@ README_PATH=${1:-README.md}
 
 # Update the README file as needed
 echo "Updating $README_PATH with code snippets..."
+echo "[*] GITHUB_TOKEN=${GITHUB_TOKEN}"
+echo "[*] GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
 
 python3 main.py 
 
