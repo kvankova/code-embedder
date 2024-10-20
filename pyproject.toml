@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "code-embedder"
+version = "0.1.0"
+description = "Embed python code from script to markdown"
+authors = ["Katerina Vankova <katerinavankova1@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
