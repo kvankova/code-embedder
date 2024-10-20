@@ -11,6 +11,7 @@ echo "Updating $README_PATH with code snippets..."
 
 python3 main.py 
 
+git checkout $GITHUB_REF_NAME
 git pull
 
 # Check if there are changes to commit
