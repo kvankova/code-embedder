@@ -13,6 +13,6 @@ jobs:
       - name: Code Embedder
         uses: ./
         with:
-          EMBED_TOKEN: ${{ secrets.EMBED_TOKEN }}
+          env: ${{ secrets.EMBED_TOKEN }}
       
 
