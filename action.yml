@@ -15,6 +15,3 @@ runs:
   image: Dockerfile
   args:
     - ${{ inputs.readme_path || 'README.md' }}
-
-env:
-  EMBED_TOKEN: ${{ secrets.EMBED_TOKEN }}
