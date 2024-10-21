@@ -1,4 +1,4 @@
-name: pre-commit
+name: pre-commit-pytest
 
 on:
   push:
@@ -39,3 +39,6 @@ jobs:
         run: |
           poetry run pre-commit install
           poetry run pre-commit run --all-files
+
+      - name: Run pytest
+        run: poetry run pytest
