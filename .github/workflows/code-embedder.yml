@@ -10,13 +10,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 1
           ref: ${{ github.event.pull_request.head.ref }}
-
 
       - name: Code Embedder
         uses: ./
         env:
-          EMBED_TOKEN: ${{ secrets.EMBED_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.EMBED_TOKEN }}
       
 

@@ -1,5 +1,4 @@
 from src import job
-from pathlib import Path
 
 readme_path = 'README.md'
 print("README path: ", readme_path)
