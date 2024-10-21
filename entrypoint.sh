@@ -12,7 +12,9 @@ BRANCH_NAME=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
 # Update the README file as needed
 echo "Updating $README_PATH with code snippets..."
 
-python3 main.py 
+ls
+
+python3 /app/main.py 
 
 git branch --show-current
 
