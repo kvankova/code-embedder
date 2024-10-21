@@ -20,6 +20,6 @@ RUN chmod +x /app/entrypoint.sh
 
 ENV PATH="$POETRY_HOME/bin:$PATH"
 
-RUN poetry install --no-root
+RUN poetry install
 
 ENTRYPOINT ["/app/entrypoint.sh"]
