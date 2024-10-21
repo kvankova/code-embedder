@@ -1,8 +1,7 @@
 from src import job
 from pathlib import Path
 
-project_root = Path(__file__).parent
-readme_path = project_root / 'README.md'
+readme_path = 'README.md'
 print("README path: ", readme_path)
 lookup_string = "```python:"
 
