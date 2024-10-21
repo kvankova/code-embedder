@@ -5,4 +5,7 @@ build:
 
 run:
 	make build
-	docker run --rm -it --env-file=.env code-embedder 
+	docker run --rm -it --env-file=.env code-embedder
+
+test:
+	poetry run pytest

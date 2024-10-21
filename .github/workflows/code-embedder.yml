@@ -4,7 +4,7 @@ on: pull_request
 
 jobs:
   code-embedder-example:
-    name: "Test: Code Embedder"
+    name: "Example code embedder"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -12,9 +12,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Code Embedder
+      - name: Run code embedder
         uses: ./
         env:
           GITHUB_TOKEN: ${{ secrets.EMBED_TOKEN }}
-      
-

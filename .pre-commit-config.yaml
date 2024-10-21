@@ -15,7 +15,7 @@ repos:
   - repo: local
     hooks:
       - id: ruff-linter
-        name: Ruff linter
+        name: ruff linter
         entry: poetry run ruff check . --fix
         language: system
         pass_filenames: false
@@ -23,7 +23,7 @@ repos:
           - python
 
       - id: ruff-format
-        name: Ruff formatter
+        name: ruff formatter
         entry: poetry run ruff format .
         language: system
         pass_filenames: false
@@ -34,13 +34,6 @@ repos:
         name: mypy
         entry: poetry run mypy .
         pass_filenames: false
-        language: system
-        types:
-          - python
-
-      - id: run-pytest
-        name: Run tests
-        entry: make test
         language: system
         types:
           - python
