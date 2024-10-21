@@ -3,6 +3,7 @@ from pathlib import Path
 
 project_root = Path(__file__).parent
 readme_path = project_root / 'README.md'
+print("README path: ", readme_path)
 lookup_string = "```python:"
 
 if __name__ == '__main__':
@@ -10,6 +11,8 @@ if __name__ == '__main__':
         readme_path = readme_path, 
         lookup_string = lookup_string
         )
+    
+    print(script_to_embed)
 
     embed_dict = job.read_embeds_from_readme(
         embed_lines=script_to_embed, 
