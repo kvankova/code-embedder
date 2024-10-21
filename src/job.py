@@ -9,12 +9,12 @@ def find_embed_lines(readme_path, lookup_string):
     
     return embed_lines
 
-def read_embeds_from_readme(embed_lines, project_root, lookup_string):
+def read_embeds_from_readme(embed_lines, lookup_string):
     embed_dict = {}
 
     for embed_line in embed_lines:
         script_path_str = embed_line.split(lookup_string)[-1].strip()
-        script_path = project_root / script_path_str
+        script_path = script_path_str
         try:
             # Read the script content as a string
             with open(script_path, 'r') as script_file:

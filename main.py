@@ -15,7 +15,6 @@ if __name__ == '__main__':
 
     embed_dict = job.read_embeds_from_readme(
         embed_lines=script_to_embed, 
-        project_root = project_root, 
         lookup_string = lookup_string
         )
 
