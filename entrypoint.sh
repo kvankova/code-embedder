@@ -16,8 +16,8 @@ python3 /app/src/main.py
 
 if [ -n "$(git status -s)" ]; then
     echo "Changes to commit..."
-    git diff --stage
     git add "$README_PATH"
+    git diff --stage
     git commit -m "Update $README_PATH"
     git push origin ${BRANCH_NAME}
 else
