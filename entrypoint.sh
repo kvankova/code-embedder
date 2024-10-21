@@ -1,7 +1,6 @@
 #!/bin/sh -l
 set -xe 
 git config --global --add safe.directory /github/workspace
-git update-index --chmod=+x entrypoint.sh
 git config --global user.name "github-actions"
 git config --global user.email "github-actions@github.com"
 git remote set-url origin https://x-access-token:$EMBED_TOKEN@github.com/$GITHUB_REPOSITORY.git
