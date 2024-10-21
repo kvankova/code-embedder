@@ -27,9 +27,6 @@ categories:
       - fix
       - bugfix
       - bug
-
-  - title: '🧰 Maintenance'
-    labels: chore
   - title: 📖 Documentation
     labels: documentation
   - title: 🛠️ Other improvements
