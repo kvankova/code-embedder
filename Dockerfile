@@ -15,11 +15,11 @@ WORKDIR /app
 
 COPY poetry.lock pyproject.toml /app/
 
-RUN poetry config virtualenvs.create false \
-    && poetry install --only main
-
 COPY . /app/
 
 RUN chmod +x /app/entrypoint.sh
+
+RUN poetry config virtualenvs.create false \
+    && poetry install --only main
 
 ENTRYPOINT ["/app/entrypoint.sh"]
