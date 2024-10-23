@@ -17,6 +17,6 @@ COPY . /app/
 RUN chmod +x /app/entrypoint.sh
 
 RUN poetry config virtualenvs.create false \
-    && poetry install
+    && poetry install --no-dev
 
 ENTRYPOINT ["/app/entrypoint.sh"]
