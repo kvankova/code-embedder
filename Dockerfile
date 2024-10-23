@@ -3,6 +3,7 @@ FROM python:3.11-slim
 ENV GITHUB_TOKEN=${GITHUB_TOKEN}
 ENV GITHUB_REPOSITORY=${GITHUB_REPOSITORY}
 ENV GITHUB_SHA=${GITHUB_SHA}
+ENV PATH="/home/.poetry/bin:/home/app/.poetry/bin:$PATH"
 
 RUN apt-get update \
     && pip install poetry==1.8.4 \
