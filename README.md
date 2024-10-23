@@ -1,21 +1,11 @@
 # code-embedder
 
+- GITHUB_TOKEN with write and repo permission
+- readme_path (path to markdown)
 
-## Script example 1
-```python:examples/example.py
-print("Code to embed")
-
-```
-
-Meow meow
-
-## Script example 2
-```python:examples/example.py
-print("Code to embed")
-
-```
-
-### Viu viu
-```python
-print("Yay")
-```
+- Add to markdown sections like this:
+````
+ ```language:path/to/script
+ ```
+````
+These sections will be filled in by content of path/to/script and updated with up-to-date content of the scripts.
