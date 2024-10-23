@@ -3,7 +3,7 @@ FROM python:3.11-slim
 ENV GITHUB_TOKEN=${GITHUB_TOKEN}
 ENV GITHUB_REPOSITORY=${GITHUB_REPOSITORY}
 ENV GITHUB_SHA=${GITHUB_SHA}
-ENV PATH="/home/.poetry/bin:/home/app/.poetry/bin:$PATH"
+ENV PATH="/home/.poetry/bin:/root/.local/bin:$PATH"
 
 RUN apt-get update \
     && pip install poetry==1.8.4 \
@@ -12,11 +12,14 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY . /app/
 
-RUN chmod +x /app/entrypoint.sh
+COPY poetry.lock pyproject.toml /app/
 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-dev
+
+COPY . /app/
+
+RUN chmod +x /app/entrypoint.sh
 
 ENTRYPOINT ["/app/entrypoint.sh"]
