@@ -1,4 +1,4 @@
-def find_embed_lines(readme_path, lookup_string):
+def find_embed_lines(readme_path: str, lookup_string: str) -> list[str]:
     embed_lines = []
 
     with open(readme_path) as file:
@@ -9,7 +9,7 @@ def find_embed_lines(readme_path, lookup_string):
     return embed_lines
 
 
-def read_embeds_from_readme(embed_lines, lookup_string):
+def read_embeds_from_readme(embed_lines: list[str], lookup_string: str) -> dict[str, str]:
     embed_dict = {}
 
     for embed_line in embed_lines:
@@ -29,7 +29,9 @@ def read_embeds_from_readme(embed_lines, lookup_string):
     return embed_dict
 
 
-def replace_embeds_in_readme(readme_path, embed_dict, lookup_string):
+def replace_embeds_in_readme(
+    readme_path: str, embed_dict: dict[str, str], lookup_string: str
+) -> None:
     # Read the README.md content
     with open(readme_path) as readme_file:
         readme_content = readme_file.readlines()
