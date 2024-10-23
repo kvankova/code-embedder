@@ -10,11 +10,10 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN chmod +x /app/entrypoint.sh
-
 WORKDIR /app
-
 COPY . /app/
+
+RUN chmod +x /app/entrypoint.sh
 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-dev
