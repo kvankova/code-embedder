@@ -5,7 +5,7 @@ from loguru import logger
 from src import job
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--readme_path", type=str, help="Path to Readme", default="README.md")
+parser.add_argument("--readme-path", type=str, help="Path to Readme", default="README.md")
 args = parser.parse_args()
 
 lookup_string = "```python:"
