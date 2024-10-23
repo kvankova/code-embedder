@@ -1,6 +1,6 @@
 import argparse
 
-import loguru
+from loguru import logger
 
 from src import job
 
@@ -16,7 +16,7 @@ def main(readme_path: str) -> None:
         readme_path=readme_path, lookup_string=lookup_string
     )
 
-    loguru.logger.info(
+    logger.info(
         f"Found {len(script_to_embed)} script paths in {readme_path}: {script_to_embed}"
     )
 
@@ -28,7 +28,7 @@ def main(readme_path: str) -> None:
         readme_path=readme_path, embed_dict=embed_dict, lookup_string=lookup_string
     )
 
-    loguru.logger.info(f"Scripts were successfully updated in {readme_path}.")
+    logger.info(f"Scripts were successfully updated in {readme_path}.")
 
 
 if __name__ == "__main__":

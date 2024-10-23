@@ -1,17 +1,17 @@
 FROM python:3.11-slim
 
-ENV GITHUB_TOKEN=${GITHUB_TOKEN}
-ENV GITHUB_REPOSITORY=${GITHUB_REPOSITORY}
-ENV GITHUB_SHA=${GITHUB_SHA}
-ENV PATH="/home/.poetry/bin:/root/.local/bin:$PATH"
+ENV PYTHONPATH="/app/src/:${PYTHONPATH}" \
+    POETRY_VERSION=1.8.4 \
+    POETRY_VIRTUALENVS_CREATE=false \
+    POETRY_NO_INTERACTION=1
+
+WORKDIR /app
 
 RUN apt-get update \
-    && pip install poetry==1.8.4 \
+    && pip install poetry==${POETRY_VERSION} \
     && apt-get install -y --no-install-recommends git ssh-client \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
 
 COPY poetry.lock pyproject.toml /app/
 
