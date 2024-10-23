@@ -1,5 +1,4 @@
 #!/bin/sh -l
-set -xe
 git config --global --add safe.directory /github/workspace
 git config --global user.name "github-actions"
 git config --global user.email "github-actions@github.com"
@@ -10,10 +9,9 @@ BRANCH_NAME=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
 
 git pull origin ${BRANCH_NAME}
 
-# Update the README file as needed
 echo "Updating $README_PATH with code snippets..."
 
-python3 /app/src/main.py
+poetry run python /app/src/main.py --readme-path "$README_PATH"
 
 if [ -n "$(git status -s)" ]; then
 

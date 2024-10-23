@@ -4,11 +4,12 @@ version = "0.1.0"
 description = "Embed python code from script to markdown"
 authors = ["Katerina Vankova <katerinavankova1@gmail.com>"]
 license = "MIT"
-readme = "README.md"
 packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+argparse = "^1.4.0"
+loguru = "^0.7.2"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"
