@@ -4,6 +4,10 @@ git config --global user.name "github-actions"
 git config --global user.email "github-actions@github.com"
 git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
 
+ls -l
+cd ..
+ls -l
+cd app/
 README_PATH=${1:-README.md}
 BRANCH_NAME=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
 
