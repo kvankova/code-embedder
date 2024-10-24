@@ -1,10 +1,10 @@
-name: code-embedder-example
+name: Code Embedder
 
 on: pull_request
 
 jobs:
-  code-embedder-example:
-    name: "Example code embedder"
+  code_embedder:
+    name: "Code embedder"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -13,6 +13,8 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Run code embedder
-        uses: ./
+        uses: kvankova/code-embedder@0.1.0
+        with:
+          readme_path: README.md
         env:
-          GITHUB_TOKEN: ${{ secrets.EMBED_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
