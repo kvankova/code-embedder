@@ -19,9 +19,7 @@ def main(readme_path: str) -> None:
         f"Found {len(script_to_embed)} script paths in {readme_path}: {script_to_embed}"
     )
 
-    embed_dict = job.read_embeds_from_readme(
-        embed_lines=script_to_embed, lookup_regex=lookup_regex
-    )
+    embed_dict = job.read_embeds_from_readme(embed_lines=script_to_embed)
 
     job.replace_embeds_in_readme(
         readme_path=readme_path, embed_dict=embed_dict, lookup_regex=lookup_regex

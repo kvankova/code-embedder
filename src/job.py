@@ -12,7 +12,7 @@ def find_embed_lines(readme_path: str, lookup_regex: str) -> list[str]:
     return embed_lines
 
 
-def read_embeds_from_readme(embed_lines: list[str], lookup_regex: str) -> dict[str, str]:
+def read_embeds_from_readme(embed_lines: list[str]) -> dict[str, str]:
     embed_dict = {}
 
     for embed_line in embed_lines:
