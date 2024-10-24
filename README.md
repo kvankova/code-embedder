@@ -33,7 +33,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Run code embedder
-        uses: kvankova/code-embedder@0.1.0
+        uses: kvankova/code-embedder@v0.1.0
         with:
           readme_path: README.md
         env:
