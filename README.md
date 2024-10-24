@@ -47,7 +47,7 @@ You can specify which README file you want to update with `readme_path` (path to
 it supports only one readme file, and if not specified, it will by default look for it in the root `README.md`.
 
 The action looks for the following sections in the readme file based on which it will update the code snippets:
-````
+````md
  ```language:path/to/script
  ```
 ````
@@ -56,7 +56,7 @@ These sections will be filled in by content of path/to/script and updated with u
 ## Example
 
 You will add the code block sections with path to the scripts in the following format:
-````
+````md
 # README
 
 This is a readme.
@@ -65,7 +65,7 @@ This is a readme.
 ````
 And once the worklow runs, the code block sections will be filled with the content of the script and updated in the readme file.
 
-````
+````md
 # README
 
 This is a readme.
