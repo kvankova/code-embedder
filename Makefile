@@ -14,4 +14,4 @@ del:
 	gh release delete 0.0.1
 	git push origin --delete 0.0.1
 	git tag -d 0.0.1
-	gh release create 0.0.1 --target add_typer -t "Testing" -n "Testing"
+	gh release create 0.0.1 -t "Testing" -n "Testing"
