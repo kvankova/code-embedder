@@ -76,9 +76,3 @@ print("Embedding successful")
 ```
 ````
 Once the content of the script changes, the code block sections will be updated in the readme file.
-
-# Areas for further improvement
-- Refactoring of the code-embedder script
-- Add possibility to specify multiple readme files
-- Add possibility to paste only part of the script
-- Add tests
