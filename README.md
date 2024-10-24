@@ -17,8 +17,7 @@ This action:
 ## Workflow file structure
 To use this action, you need to configure a yaml workflow file in `.github/workflows` folder (e.g. `.github/workflows/code-embedder.yaml`) with the following content:
 
-```yaml:.github/workflows/code-embedder.yaml
-
+```yaml:.github/workflows/code-embedder.yml
 ```
 It requires a secret `GITHUB_TOKEN` with write and repo permission.
 
@@ -29,6 +28,7 @@ it supports only one readme file, and if not specified, it will by default look 
 The action looks for the following sections in the readme file based on which it will update the code snippets:
 ````
  ```language:path/to/script
+ ```
 
 ````
 These sections will be filled in by content of path/to/script and updated with up-to-date content of the scripts.
@@ -41,7 +41,6 @@ You will add the code block sections with path to the scripts in the following f
 
 This is a readme.
 ```python:main.py
-
 ```
 ````
 And once the worklow runs, the code block sections will be filled with the content of the script and updated in the readme file.
@@ -51,7 +50,7 @@ And once the worklow runs, the code block sections will be filled with the conte
 
 This is a readme.
 ```python:main.py
-
+print("Embedding successful")
 ```
 ````
 Once the content of the script changes, the code block sections will be updated in the readme file.
