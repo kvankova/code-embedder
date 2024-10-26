@@ -13,23 +13,21 @@ class ScriptMetadata:
 
 
 class ScriptPathExtractor:
-    def __init__(self, readme_path: str, lookup_regex: str) -> None:
-        self._readme_path = readme_path
-        self._lookup_regex = lookup_regex
+    def __init__(self) -> None:
+        self._lookup_regex = r"^```.*?:"
+        self._code_block_end = "```"
+        self._split_path_mark = ":"
 
-    def extract(self) -> list[ScriptMetadata]:
-        with open(self._readme_path) as readme_file:
-            readme_lines = readme_file.readlines()
-
+    def extract(self, readme_content: list[str]) -> list[ScriptMetadata]:
         scripts = []
         inside_code_block = False
 
-        for row, line in enumerate(readme_lines):
+        for row, line in enumerate(readme_content):
             if re.search(self._lookup_regex, line):
                 inside_code_block = True
-                path = line.split(":")[-1].strip()
+                path = line.split(self._split_path_mark)[-1].strip()
                 start = row
-            if (line.strip() == ("```")) & inside_code_block:
+            elif (line.strip() == (self._code_block_end)) & inside_code_block:
                 end = row
                 scripts.append(
                     ScriptMetadata(readme_start=start, readme_end=end, path=path, content="")
@@ -43,11 +41,9 @@ class CodeEmbedder:
     def __init__(
         self,
         readme_path: str,
-        lookup_regex: str,
         script_path_extractor: ScriptPathExtractor,
     ) -> None:
         self._readme_path = readme_path
-        self._lookup_regex = lookup_regex
         self._script_path_extractor = script_path_extractor
 
     def __call__(self) -> None:
@@ -58,7 +54,7 @@ class CodeEmbedder:
             logger.info("Empty README. Skipping.")
             return
 
-        scripts = self._script_path_extractor.extract()
+        scripts = self._script_path_extractor.extract(readme_content=self.readme_content)
 
         if len(scripts) == 0:
             logger.info("No script paths found in README. Skipping.")
