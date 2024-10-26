@@ -10,6 +10,8 @@ if [ -z "$README_PATHS" ]; then
     README_PATHS="README.md"
 fi
 
+echo "README_PATHS: $README_PATHS"
+
 BRANCH_NAME=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
 
 git pull origin ${BRANCH_NAME}
