@@ -9,7 +9,7 @@ inputs:
   readme_paths:
     description: "Path(s) to Readme file(s). Can be a single path or a list of paths. By default, it finds it in the root."
     required: false
-    default: '["README.md"]'
+    default: "README.md"
 
 runs:
   using: docker
