@@ -2,8 +2,7 @@
 
 This is a test readme.
 
-Update following code snippet:
-
+This will be filled:
 ```python:tests/data/example.py
 ```
 
