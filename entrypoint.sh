@@ -4,10 +4,8 @@ git config --global user.name "github-actions"
 git config --global user.email "github-actions@github.com"
 git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
 
-# Read the JSON array of readme paths from the first argument
-README_PATHS=$(echo $1 | jq -r '.[]')
+README_PATHS=$1
 
-# If no paths are provided, default to README.md
 if [ -z "$README_PATHS" ]; then
     README_PATHS="README.md"
 fi

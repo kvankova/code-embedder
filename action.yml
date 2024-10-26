@@ -15,4 +15,4 @@ runs:
   using: docker
   image: Dockerfile
   args:
-    - ${{ toJson(inputs.readme_paths) }}
+    - ${{ inputs.readme_paths }}
