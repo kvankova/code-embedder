@@ -60,7 +60,7 @@ def test_script_path_extractor(
     assert script_path_extractor.extract(readme_content=readme_content) == expected
 
 
-def test_code_embedder() -> None:
+def test_code_embedder_read_script_content() -> None:
     code_embedder = CodeEmbedder(
         readme_path="tests/data/readme.md",
         script_path_extractor=ScriptPathExtractor(),
@@ -78,6 +78,30 @@ def test_code_embedder() -> None:
             readme_start=6,
             readme_end=7,
             path="tests/data/example.py",
-            content='import this\n\nprint("Hello, World!")',
+            content='print("Hello, World! from script")\n',
         )
     ]
+
+
+def test_code_embedder() -> None:
+    with open("tests/data/readme.md") as readme_file:
+        readme_content = readme_file.readlines()
+
+    code_embedder = CodeEmbedder(
+        readme_path="tests/data/readme.md",
+        script_path_extractor=ScriptPathExtractor(),
+    )
+
+    code_embedder()
+
+    with open("tests/data/expected_readme.md") as readme_file:
+        expected_readme_content = readme_file.readlines()
+
+    with open("tests/data/readme.md") as readme_file:
+        updated_readme_content = readme_file.readlines()
+
+    assert expected_readme_content == updated_readme_content
+
+    # revert changes
+    with open("tests/data/readme.md", "w") as readme_file:
+        readme_file.writelines(readme_content)
