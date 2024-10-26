@@ -7,7 +7,7 @@ This will update:
 ```
 
 This will update:
-```yaml:release-drafter-config.yml
+```yaml:.github/release-drafter-config.yml
 ```
 
 This won't update:
