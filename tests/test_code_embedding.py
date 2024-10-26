@@ -57,12 +57,13 @@ def test_script_path_extractor(
     readme_content: list[str], expected: list[ScriptMetadata]
 ) -> None:
     script_path_extractor = ScriptPathExtractor()
-    assert script_path_extractor.extract(readme_content=readme_content) == expected
+    result = script_path_extractor.extract(readme_content=readme_content)
+    assert result == expected
 
 
 def test_code_embedder_read_script_content() -> None:
     code_embedder = CodeEmbedder(
-        readme_path="tests/data/readme.md",
+        readme_paths=["tests/data/readme.md"],
         script_path_extractor=ScriptPathExtractor(),
     )
 
@@ -84,25 +85,35 @@ def test_code_embedder_read_script_content() -> None:
 
 
 def test_code_embedder(tmp_path) -> None:
-    original_path = "tests/data/readme.md"
-    expected_path = "tests/data/expected_readme.md"
+    original_paths = [
+        "tests/data/readme0.md",
+        "tests/data/readme1.md",
+        "tests/data/readme2.md",
+    ]
+    expected_paths = [
+        "tests/data/expected_readme0.md",
+        "tests/data/expected_readme1.md",
+        "tests/data/expected_readme2.md",
+    ]
 
     # Create a temporary copy of the original file
-    temp_readme_path = tmp_path / "readme.md"
-    with open(original_path) as readme_file:
-        temp_readme_path.write_text(readme_file.read())
+    temp_readme_paths = [tmp_path / f"readme{i}.md" for i in range(len(original_paths))]
+    for original_path, temp_readme_path in zip(original_paths, temp_readme_paths):
+        with open(original_path) as readme_file:
+            temp_readme_path.write_text(readme_file.read())
 
     code_embedder = CodeEmbedder(
-        readme_path=str(temp_readme_path),
+        readme_paths=[str(temp_readme_path) for temp_readme_path in temp_readme_paths],
         script_path_extractor=ScriptPathExtractor(),
     )
 
     code_embedder()
 
-    with open(expected_path) as expected_file:
-        expected_readme_content = expected_file.readlines()
+    for expected_path, temp_readme_path in zip(expected_paths, temp_readme_paths):
+        with open(expected_path) as expected_file:
+            expected_readme_content = expected_file.readlines()
 
-    with open(temp_readme_path) as updated_file:
-        updated_readme_content = updated_file.readlines()
+        with open(temp_readme_path) as updated_file:
+            updated_readme_content = updated_file.readlines()
 
-    assert expected_readme_content == updated_readme_content
+        assert expected_readme_content == updated_readme_content

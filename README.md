@@ -9,9 +9,9 @@ Code embedder is a GitHub action that updates your README.md with up-to-date cod
 
 ## Description
 This action:
-1. reads a README file from `readme_path` input,
-1. looks for specific script tags in the README,
-1. reads the content of the script and embeds it in the README at the corresponding tag,
+1. reads one or more README files from `readme_paths` input,
+1. looks for specific script tags in the READMEs,
+1. reads the content of the scripts and embeds it in the READMEs at the corresponding tags,
 1. pushes the changes to the repository.
 
 ## Workflow file structure
@@ -35,7 +35,7 @@ jobs:
       - name: Run code embedder
         uses: kvankova/code-embedder@v0.1.0
         with:
-          readme_path: README.md
+          readme_paths: README.md README2.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -43,8 +43,7 @@ jobs:
 It requires a secret `GITHUB_TOKEN` with write and repo permission.
 
 ## README file configuration
-You can specify which README file you want to update with `readme_path` (path to markdown). As of now,
-it supports only one readme file, and if not specified, it will by default look for it in the root `README.md`.
+You can specify which README files you want to update with `readme_paths` (paths to markdown files). If no README files are provided, it will by default look for it in the root `README.md`. Argument `readme_paths` accepts multiple paths separated by spaces, example: `README.md README2.md`.
 
 The action looks for the following sections in the readme file based on which it will update the code snippets:
 ````md
