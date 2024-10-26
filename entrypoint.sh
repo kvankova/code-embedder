@@ -16,7 +16,7 @@ git pull origin ${BRANCH_NAME}
 
 echo "Updating $README_PATHS with code snippets..."
 
-poetry run python /app/src/main.py --readme-paths "$README_PATHS"
+poetry run python /app/src/main.py --readme-paths $README_PATHS
 
 if [ -n "$(git status -s)" ]; then
 
