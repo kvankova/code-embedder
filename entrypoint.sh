@@ -7,7 +7,7 @@ git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHU
 README_PATHS=$1
 
 if [ -z "$README_PATHS" ]; then
-    README_PATHS="README.md"
+    README_PATHS=README.md
 fi
 
 echo "README_PATHS: $README_PATHS"
