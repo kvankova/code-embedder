@@ -5,9 +5,10 @@ git config --global user.email "github-actions@github.com"
 git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
 
 README_PATHS=$1
+echo "README_PATHS: $README_PATHS"
 
 if [ -z "$README_PATHS" ]; then
-    README_PATHS=README.md
+    README_PATHS="README.md"
 fi
 
 echo "README_PATHS: $README_PATHS"
