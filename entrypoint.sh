@@ -21,7 +21,7 @@ poetry run python /app/src/main.py --readme-paths $README_PATHS
 if [ -n "$(git status -s)" ]; then
 
     echo "Changes to commit..."
-    git add "$README_PATHS"
+    git add $README_PATHS
     git diff --staged
     git commit -m "Update $README_PATHS"
     git push origin ${BRANCH_NAME}
