@@ -14,5 +14,7 @@ jobs:
 
       - name: Run code embedder
         uses: ./
+        with:
+          readme_paths: .github/test_README.md .github/test_empty_README.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
