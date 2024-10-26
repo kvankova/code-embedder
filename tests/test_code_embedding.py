@@ -1,6 +1,6 @@
 import pytest
 
-from src.code_embedding import ScriptMetadata, ScriptPathExtractor
+from src.code_embedding import CodeEmbedder, ScriptMetadata, ScriptPathExtractor
 
 
 @pytest.mark.parametrize(
@@ -58,3 +58,26 @@ def test_script_path_extractor(
 ) -> None:
     script_path_extractor = ScriptPathExtractor()
     assert script_path_extractor.extract(readme_content=readme_content) == expected
+
+
+def test_code_embedder() -> None:
+    code_embedder = CodeEmbedder(
+        readme_path="tests/data/readme.md",
+        script_path_extractor=ScriptPathExtractor(),
+    )
+
+    scripts = code_embedder._read_script_content(
+        scripts=[
+            ScriptMetadata(
+                readme_start=6, readme_end=7, path="tests/data/example.py", content=""
+            )
+        ]
+    )
+    assert scripts == [
+        ScriptMetadata(
+            readme_start=6,
+            readme_end=7,
+            path="tests/data/example.py",
+            content='import this\n\nprint("Hello, World!")',
+        )
+    ]
