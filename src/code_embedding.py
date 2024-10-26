@@ -57,26 +57,36 @@ class CodeEmbedder:
         self._script_path_extractor = script_path_extractor
 
     def __call__(self) -> None:
-        with open(self._readme_path) as readme_file:
-            self.readme_content = readme_file.readlines()
+        self._validate_and_read_readme()
 
-        if len(self.readme_content) == 0:
+        if not self.readme_content:
             logger.info("Empty README. Skipping.")
             return
 
-        scripts = self._script_path_extractor.extract(readme_content=self.readme_content)
-
-        if len(scripts) == 0:
-            logger.info("No script paths found in README. Skipping.")
+        scripts = self._extract_and_validate_scripts()
+        if not scripts:
             return
 
-        logger.info(
-            f"Found script paths in README: {set([script.path for script in scripts])}"
-        )
-
         script_contents = self._read_script_content(scripts=scripts)
+        self._update_readme(script_contents=script_contents)
 
-        self.update_readme(script_contents=script_contents)
+    def _validate_and_read_readme(self) -> None:
+        if not self._readme_path.endswith(".md"):
+            logger.error("README path must end with .md")
+            raise ValueError("README path must end with .md")
+
+        with open(self._readme_path) as readme_file:
+            self.readme_content = readme_file.readlines()
+
+    def _extract_and_validate_scripts(self) -> list[ScriptMetadata] | None:
+        scripts = self._script_path_extractor.extract(readme_content=self.readme_content)
+
+        if not scripts:
+            logger.info("No script paths found in README. Skipping.")
+            return None
+
+        logger.info(f"Found script paths in README: {set(script.path for script in scripts)}")
+        return scripts
 
     def _read_script_content(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
         script_contents: list[ScriptMetadata] = []
@@ -89,11 +99,11 @@ class CodeEmbedder:
                 script_contents.append(script)
 
             except FileNotFoundError:
-                print(f"Error: {script.path} not found. Skipping.")
+                logger.error(f"Error: {script.path} not found. Skipping.")
 
         return script_contents
 
-    def update_readme(self, script_contents: list[ScriptMetadata]) -> None:
+    def _update_readme(self, script_contents: list[ScriptMetadata]) -> None:
         updated_readme = []
         readme_content_cursor = 0
 
