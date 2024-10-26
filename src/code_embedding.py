@@ -14,27 +14,37 @@ class ScriptMetadata:
 
 class ScriptPathExtractor:
     def __init__(self) -> None:
-        self._lookup_regex = r"^```.*?:"
+        self._code_block_start_regex = r"^```.*?:"
         self._code_block_end = "```"
-        self._split_path_mark = ":"
+        self._path_separator = ":"
 
     def extract(self, readme_content: list[str]) -> list[ScriptMetadata]:
         scripts = []
-        inside_code_block = False
+        current_block = None
 
         for row, line in enumerate(readme_content):
-            if re.search(self._lookup_regex, line):
-                inside_code_block = True
-                path = line.split(self._split_path_mark)[-1].strip()
-                start = row
-            elif (line.strip() == (self._code_block_end)) & inside_code_block:
-                end = row
-                scripts.append(
-                    ScriptMetadata(readme_start=start, readme_end=end, path=path, content="")
-                )
-                inside_code_block = False
+            if self._is_code_block_start(line):
+                current_block = self._start_new_block(line, row)
+            elif self._is_code_block_end(line) and current_block:
+                scripts.append(self._finish_current_block(current_block, row))
+                current_block = None
 
         return scripts
+
+    def _is_code_block_start(self, line: str) -> bool:
+        return re.search(self._code_block_start_regex, line) is not None
+
+    def _is_code_block_end(self, line: str) -> bool:
+        return line.strip() == self._code_block_end
+
+    def _start_new_block(self, line: str, row: int) -> dict:
+        path = line.split(self._path_separator)[-1].strip()
+        return {"start": row, "path": path}
+
+    def _finish_current_block(self, block: dict, end_row: int) -> ScriptMetadata:
+        return ScriptMetadata(
+            readme_start=block["start"], readme_end=end_row, path=block["path"], content=""
+        )
 
 
 class CodeEmbedder:
