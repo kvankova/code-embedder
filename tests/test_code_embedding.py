@@ -83,25 +83,26 @@ def test_code_embedder_read_script_content() -> None:
     ]
 
 
-def test_code_embedder() -> None:
-    with open("tests/data/readme.md") as readme_file:
-        readme_content = readme_file.readlines()
+def test_code_embedder(tmp_path) -> None:
+    original_path = "tests/data/readme.md"
+    expected_path = "tests/data/expected_readme.md"
+
+    # Create a temporary copy of the original file
+    temp_readme_path = tmp_path / "readme.md"
+    with open(original_path) as readme_file:
+        temp_readme_path.write_text(readme_file.read())
 
     code_embedder = CodeEmbedder(
-        readme_path="tests/data/readme.md",
+        readme_path=str(temp_readme_path),
         script_path_extractor=ScriptPathExtractor(),
     )
 
     code_embedder()
 
-    with open("tests/data/expected_readme.md") as readme_file:
-        expected_readme_content = readme_file.readlines()
+    with open(expected_path) as expected_file:
+        expected_readme_content = expected_file.readlines()
 
-    with open("tests/data/readme.md") as readme_file:
-        updated_readme_content = readme_file.readlines()
+    with open(temp_readme_path) as updated_file:
+        updated_readme_content = updated_file.readlines()
 
     assert expected_readme_content == updated_readme_content
-
-    # revert changes
-    with open("tests/data/readme.md", "w") as readme_file:
-        readme_file.writelines(readme_content)

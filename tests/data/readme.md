@@ -17,3 +17,8 @@ This won't be updated:
 ```
 print("Hello, World!")
 ```
+
+This will be updated:
+```python:tests/data/example.py
+print("Hello, World!")
+```
