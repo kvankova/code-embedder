@@ -6,7 +6,7 @@ from src.code_embedding import CodeEmbedder, ScriptPathExtractor
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    "--readme-paths", nargs="+", type=str, help="Paths to Readme files", default=["README.md"]
+    "--readme-paths", nargs="+", type=str, help="Paths to Readme files", default="README.md"
 )
 args = parser.parse_args()
 
