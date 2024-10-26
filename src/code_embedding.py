@@ -50,42 +50,52 @@ class ScriptPathExtractor:
 class CodeEmbedder:
     def __init__(
         self,
-        readme_path: str,
+        readme_paths: list[str],
         script_path_extractor: ScriptPathExtractor,
     ) -> None:
-        self._readme_path = readme_path
+        self._readme_paths = readme_paths
         self._script_path_extractor = script_path_extractor
 
     def __call__(self) -> None:
-        self._validate_and_read_readme()
+        for readme_path in self._readme_paths:
+            self._process_readme(readme_path)
 
-        if not self.readme_content:
-            logger.info("Empty README. Skipping.")
+    def _process_readme(self, readme_path: str) -> None:
+        readme_content = self._read_readme(readme_path)
+        if not readme_content:
+            logger.info(f"Empty README in path {readme_path}. Skipping.")
             return
 
-        scripts = self._extract_and_validate_scripts()
+        scripts = self._extract_scripts(readme_content=readme_content, readme_path=readme_path)
         if not scripts:
             return
 
         script_contents = self._read_script_content(scripts=scripts)
-        self._update_readme(script_contents=script_contents)
+        self._update_readme(
+            script_contents=script_contents,
+            readme_content=readme_content,
+            readme_path=readme_path,
+        )
 
-    def _validate_and_read_readme(self) -> None:
-        if not self._readme_path.endswith(".md"):
+    def _read_readme(self, readme_path: str) -> list[str]:
+        if not readme_path.endswith(".md"):
             logger.error("README path must end with .md")
             raise ValueError("README path must end with .md")
 
-        with open(self._readme_path) as readme_file:
-            self.readme_content = readme_file.readlines()
+        with open(readme_path) as readme_file:
+            return readme_file.readlines()
 
-    def _extract_and_validate_scripts(self) -> list[ScriptMetadata] | None:
-        scripts = self._script_path_extractor.extract(readme_content=self.readme_content)
-
+    def _extract_scripts(
+        self, readme_content: list[str], readme_path: str
+    ) -> list[ScriptMetadata] | None:
+        scripts = self._script_path_extractor.extract(readme_content=readme_content)
         if not scripts:
-            logger.info("No script paths found in README. Skipping.")
+            logger.info(f"No script paths found in README in path {readme_path}. Skipping.")
             return None
-
-        logger.info(f"Found script paths in README: {set(script.path for script in scripts)}")
+        logger.info(
+            f"""Found script paths in README in path {readme_path}:
+            {set(script.path for script in scripts)}"""
+        )
         return scripts
 
     def _read_script_content(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
@@ -103,19 +113,22 @@ class CodeEmbedder:
 
         return script_contents
 
-    def _update_readme(self, script_contents: list[ScriptMetadata]) -> None:
+    def _update_readme(
+        self,
+        script_contents: list[ScriptMetadata],
+        readme_content: list[str],
+        readme_path: str,
+    ) -> None:
         updated_readme = []
         readme_content_cursor = 0
 
         for script in script_contents:
-            updated_readme += self.readme_content[
-                readme_content_cursor : script.readme_start + 1
-            ]
+            updated_readme += readme_content[readme_content_cursor : script.readme_start + 1]
             updated_readme += script.content + "\n"
 
             readme_content_cursor = script.readme_end
 
-        updated_readme += self.readme_content[readme_content_cursor:]
+        updated_readme += readme_content[readme_content_cursor:]
 
-        with open(self._readme_path, "w") as readme_file:
+        with open(readme_path, "w") as readme_file:
             readme_file.writelines(updated_readme)
