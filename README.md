@@ -11,16 +11,28 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
 ## 📚 Description
 
+Code Embedder is a GitHub Action that automatically updates code snippets in your `README` files. It scans your `README` for specially formatted code blocks that reference specific script files, then replaces the content of these blocks with the current contents of the referenced scripts. This ensures that your documentation always stays in sync with your actual code.
+
+Key features:
+- Automatic synchronization: Keep your `README` code examples up-to-date without manual intervention.
+- Easy setup: Simply add the action to your GitHub workflow and format your `README` code blocks.
+- Language agnostic: Works with any programming language or file type.
+- Maintains formatting: Preserves the original markdown structure of your `README`.
+
+By using Code Embedder, you can focus on writing and updating your actual code, while letting the action take care of keeping your documentation current. This reduces the risk of outdated or incorrect code examples in your project documentation.
+
+## 🔍 How it works
+
 This action looks for the following sections in the `README` file:
 ````md
  ```language:path/to/script
  ```
 ````
-This action will update the code snippets in `README` files with the content of the script located at `path/to/script` and push the changes to the repository.
+It will update the code snippets in `README` files with the content of the script located at `path/to/script` and push the changes to the repository.
 
-### 💡 Example
+## 💡 Example
 
-You will add the code block sections with path to the scripts in the following format:
+Let's say you have the following `README` file:
 ````md
 # README
 
@@ -34,7 +46,7 @@ The `main.py` file contains the following code:
 print("Embedding successful")
 ```
 
-And once the worklow runs, the code block sections will be filled with the content of the script located at `main.py` and updated in the `README` file.
+And once the workflow runs, the code block sections will be filled with the content of the script located at `main.py` and updated in the `README` file.
 
 ````md
 # README
