@@ -12,17 +12,22 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Read latest tag
+        id: read_tag
         run: |
           TAG=$(git describe --tags --abbrev=0)
           echo "Latest tag: $TAG"
           echo "TAG=${TAG}" >> $GITHUB_OUTPUT
 
       - name: Update version in pyproject.toml
+        env:
+          TAG: ${{ steps.read_tag.outputs.TAG }}
         run: |
           sed -i "s/^version = .*/version = \"$TAG\"/" pyproject.toml
           cat pyproject.toml
 
       - name: Update README.md
+        env:
+          TAG: ${{ steps.read_tag.outputs.TAG }}
         run: |
           sed -i "s/kvankova\/code-embedder@.*/kvankova\/code-embedder@$TAG/" README.md
           cat README.md
