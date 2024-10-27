@@ -1,7 +1,6 @@
 # code-embedder
-<p align="center">
-  <img src="assets/front.png" alt="Image" width="600" />
-</p>
+<img src="assets/front.png" alt="Image" />
+
 
 Code embedder is a GitHub action that updates your README.md with up-to-date code snippets from your scripts.
 
