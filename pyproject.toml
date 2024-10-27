@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "code-embedder"
-version = "0.2.0"
+version = "v0.3.0"
 description = "Embed python code from script to markdown"
 authors = ["Katerina Vankova <katerinavankova1@gmail.com>"]
 license = "MIT"
