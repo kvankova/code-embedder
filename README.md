@@ -11,7 +11,7 @@ This action looks for the following sections in the readme file:
  ```language:path/to/script
  ```
 ````
-This action will update the code snippets with the content of the script located at `path/to/script` and push the changes to the repository.
+This action will update the code snippets in README files with the content of the script located at `path/to/script` and push the changes to the repository.
 
 ### Example
 
@@ -24,6 +24,11 @@ This is a readme.
 ```python:main.py
 ```
 ````
+The `main.py` file contains the following code:
+```python
+print("Embedding successful")
+```
+
 And once the worklow runs, the code block sections will be filled with the content of the script located at `main.py` and updated in the readme file.
 
 ````md
@@ -36,7 +41,6 @@ print("Embedding successful")
 ```
 ````
 Once the content of the script located at `main.py` changes, the code block section will be updated in the readme file with the next workflow run.
-
 
 ## Setup
 To use this action, you need to configure a yaml workflow file in `.github/workflows` folder (e.g. `.github/workflows/code-embedder.yaml`) with the following content:
@@ -64,9 +68,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 ```
-It requires a secret `GITHUB_TOKEN` with write and repo permission.
+You need to create a secret with write and repo permissions in the repository settings to pass it as `GITHUB_TOKEN` in the workflow.
 
-You can specify which README files you want to update with `readme_paths` (paths to markdown files). If no README files are provided, it will by default look for a README file in the root `README.md`. Argument `readme_paths` accepts multiple paths separated by spaces, example: `README.md README2.md`.
+You can specify which README files you want to update using the `readme_paths` input. This input accepts one or more paths to markdown files, separated by spaces. For example: `README.md README2.md`.
 
 ## Under the hood
 This action:
