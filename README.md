@@ -3,9 +3,7 @@
 <img src="assets/front.png" alt="Image" />
 
 ## **Code Embedder**
-Seamlessly update code snippets in your **README** files! <img src="assets/code.svg" alt="Code Icon" style="vertical-align: middle; margin-right: 2px;" width="22" height="22"/><img src="assets/refresh-cw.svg" alt="Refresh Icon" style="vertical-align: middle; margin-right: 2px;" width="22" height="22"/><img src="assets/book.svg" alt="Book Icon" style="vertical-align: middle; margin-right: 2px;" width="22" height="22"/><img src="assets/git-commit.svg" alt="Commit Icon" style="vertical-align: middle; margin-right: 2px;" width="22" height="22"/>
-
-
+Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
 [Description](#-description) • [Example](#-example) • [Setup](#-setup) • [Under the hood](#-under-the-hood)
 </div>
@@ -13,12 +11,12 @@ Seamlessly update code snippets in your **README** files! <img src="assets/code.
 
 ## 📚 Description
 
-This action looks for the following sections in the readme file:
+This action looks for the following sections in the `README` file:
 ````md
  ```language:path/to/script
  ```
 ````
-This action will update the code snippets in README files with the content of the script located at `path/to/script` and push the changes to the repository.
+This action will update the code snippets in `README` files with the content of the script located at `path/to/script` and push the changes to the repository.
 
 ### 💡 Example
 
@@ -36,7 +34,7 @@ The `main.py` file contains the following code:
 print("Embedding successful")
 ```
 
-And once the worklow runs, the code block sections will be filled with the content of the script located at `main.py` and updated in the readme file.
+And once the worklow runs, the code block sections will be filled with the content of the script located at `main.py` and updated in the `README` file.
 
 ````md
 # README
@@ -47,7 +45,7 @@ This is a readme.
 print("Embedding successful")
 ```
 ````
-Once the content of the script located at `main.py` changes, the code block section will be updated in the readme file with the next workflow run.
+Once the content of the script located at `main.py` changes, the code block section will be updated in the `README` file with the next workflow run.
 
 ## 🔧 Setup
 To use this action, you need to configure a yaml workflow file in `.github/workflows` folder (e.g. `.github/workflows/code-embedder.yaml`) with the following content:
@@ -77,11 +75,11 @@ jobs:
 ```
 You need to create a secret with write and repo permissions in the repository settings to pass it as `GITHUB_TOKEN` in the workflow.
 
-You can specify which README files you want to update using the `readme_paths` input. This input accepts one or more paths to markdown files, separated by spaces. For example: `README.md README2.md`.
+You can specify which `README` files you want to update using the `readme_paths` input. This input accepts one or more paths to markdown files, separated by spaces. For example: `README.md README2.md`.
 
 ## 🔬 Under the hood
 This action:
-1. 📝 reads one or more README files from `readme_paths` input,
-1. 🔍 looks for script paths in the READMEs,
-1. 📄 reads the content of the scripts and embeds it in the READMEs at the corresponding locations,
+1. 📝 reads one or more `README` files from `readme_paths` input,
+1. 🔍 looks for script paths in the `README`s,
+1. 📄 reads the content of the scripts and embeds it in the `README`s at the corresponding locations,
 1. 🚀 pushes the changes to the repository.
