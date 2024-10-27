@@ -1,0 +1,32 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read latest tag
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          echo "Latest tag: $TAG"
+          echo "TAG=${TAG}" >> $GITHUB_OUTPUT
+
+      - name: Update version in pyproject.toml
+        run: |
+          sed -i "s/^version = .*/version = \"$TAG\"/" pyproject.toml
+          cat pyproject.toml
+
+      - name: Update README.md
+        run: |
+          sed -i "s/kvankova\/code-embedder@.*/kvankova\/code-embedder@$TAG/" README.md
+          cat README.md
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add pyproject.toml README.md
+          git commit -m "Bump version to $TAG"
+          git push
