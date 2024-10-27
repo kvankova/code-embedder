@@ -86,7 +86,7 @@ jobs:
 ```
 You need to create a secret with write and repo permissions in the repository settings to pass it as `GITHUB_TOKEN` in the workflow.
 
-You can specify which `README` files you want to update using the `readme_paths` input. This input accepts one or more paths to markdown files, separated by spaces. For example: `README.md README2.md`.
+You can specify which `README` files you want to update using the `readme_paths` input. This input accepts one or more paths to markdown files, separated by spaces. For example: `README.md README2.md`. If not specified, the action will update `README.md` file at the root of the repository.
 
 ## 🔬 Under the hood
 This action:
