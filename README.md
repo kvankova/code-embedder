@@ -5,7 +5,7 @@
 ## **Code Embedder**
 Keep your code snippets in README files up-to-date with Code-Embedder.
 
-[Description](#-description) • [Setup](#-setup) • [Under the hood](#-under-the-hood)
+[Description](#-description) • [Example](#-example) • [Setup](#-setup) • [Under the hood](#-under-the-hood)
 </div>
 
 
