@@ -5,14 +5,6 @@ branding:
   icon: "code"
   color: "blue"
 
-inputs:
-  readme_paths:
-    description: "Path(s) to Readme file(s). Can be a single path or a list of paths. By default, it finds it in the root."
-    required: false
-    default: "README.md"
-
 runs:
   using: docker
   image: Dockerfile
-  args:
-    - ${{ inputs.readme_paths }}
