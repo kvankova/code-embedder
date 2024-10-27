@@ -1,10 +1,15 @@
-# code-embedder
+<div align="center">
+
 <img src="assets/front.png" alt="Image" />
 
-
+## **Code Embedder**
 Keep your code snippets in README files up-to-date with Code-Embedder.
 
-## Description
+[Description](#-description) • [Setup](#-setup) • [Under the hood](#-under-the-hood)
+</div>
+
+
+## 🚀 Description
 
 This action looks for the following sections in the readme file:
 ````md
@@ -13,7 +18,7 @@ This action looks for the following sections in the readme file:
 ````
 This action will update the code snippets in README files with the content of the script located at `path/to/script` and push the changes to the repository.
 
-### Example
+### 💡 Example
 
 You will add the code block sections with path to the scripts in the following format:
 ````md
@@ -42,7 +47,7 @@ print("Embedding successful")
 ````
 Once the content of the script located at `main.py` changes, the code block section will be updated in the readme file with the next workflow run.
 
-## Setup
+## 🔧 Setup
 To use this action, you need to configure a yaml workflow file in `.github/workflows` folder (e.g. `.github/workflows/code-embedder.yaml`) with the following content:
 
 ```yaml
@@ -72,7 +77,7 @@ You need to create a secret with write and repo permissions in the repository se
 
 You can specify which README files you want to update using the `readme_paths` input. This input accepts one or more paths to markdown files, separated by spaces. For example: `README.md README2.md`.
 
-## Under the hood
+## 🔬 Under the hood
 This action:
 1. reads one or more README files from `readme_paths` input,
 1. looks for script paths in the READMEs,
