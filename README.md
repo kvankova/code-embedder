@@ -3,13 +3,15 @@
 <img src="assets/front.png" alt="Image" />
 
 ## **Code Embedder**
-Keep your code snippets in README files up-to-date with Code-Embedder.
+Seamlessly update code snippets in your **README** files! <img src="assets/code.svg" alt="Code Icon" style="vertical-align: middle; margin-right: 2px;" width="22" height="22"/><img src="assets/refresh-cw.svg" alt="Refresh Icon" style="vertical-align: middle; margin-right: 2px;" width="22" height="22"/><img src="assets/book.svg" alt="Book Icon" style="vertical-align: middle; margin-right: 2px;" width="22" height="22"/><img src="assets/git-commit.svg" alt="Commit Icon" style="vertical-align: middle; margin-right: 2px;" width="22" height="22"/>
+
+
 
 [Description](#-description) • [Example](#-example) • [Setup](#-setup) • [Under the hood](#-under-the-hood)
 </div>
 
 
-## 🚀 Description
+## 📚 Description
 
 This action looks for the following sections in the readme file:
 ````md
@@ -79,7 +81,7 @@ You can specify which README files you want to update using the `readme_paths` i
 
 ## 🔬 Under the hood
 This action:
-1. reads one or more README files from `readme_paths` input,
-1. looks for script paths in the READMEs,
-1. reads the content of the scripts and embeds it in the READMEs at the corresponding locations,
-1. pushes the changes to the repository.
+1. 📝 reads one or more README files from `readme_paths` input,
+1. 🔍 looks for script paths in the READMEs,
+1. 📄 reads the content of the scripts and embeds it in the READMEs at the corresponding locations,
+1. 🚀 pushes the changes to the repository.
