@@ -11,7 +11,7 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
 ## 📚 Description
 
-**Code Embedder** is a GitHub Action that automatically updates code snippets in your `README` files. It finds code blocks in your `README` that reference specific scripts, then replaces these blocks with the current content of those scripts. This keeps your documentation in sync with your code.
+**Code Embedder** is a GitHub Action that automatically updates code snippets in your markdown (`README`) files. It finds code blocks in your `README` that reference specific scripts, then replaces these blocks with the current content of those scripts. This keeps your documentation in sync with your code.
 
 ✨ **Key features**
 - 🔄 **Automatic synchronization**: Keep your `README` code examples up-to-date without manual intervention.
@@ -22,7 +22,7 @@ By using **Code Embedder**, you can focus on writing and updating your actual co
 
 ## 🔍 How it works
 
-The action looks for the following sections in the `README` file:
+The action looks for the following sections in the all markdown (`README`) files:
 ````md
  ```language:path/to/script
  ```
@@ -78,18 +78,14 @@ jobs:
 
       - name: Run code embedder
         uses: kvankova/code-embedder@v0.2.0
-        with:
-          readme_paths: README.md README2.md
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 ```
 You need to create a secret with write and repo permissions in the repository settings to pass it as `GITHUB_TOKEN` in the workflow.
 
-Use the `readme_paths` input to specify which README files to update. Multiple files can be listed with spaces (e.g. `README.md README2.md`). By default, only `README.md` in the root directory is updated.
-
 ## 🔬 Under the hood
 This action performs the following steps:
-1. 🔎 Scans through the `README` files to identify referenced script files.
-1. 📝 Extracts the contents from those script files and updates the corresponding code blocks in the `README` files.
+1. 🔎 Scans through the markdown (`README`) files to identify referenced script files.
+1. 📝 Extracts the contents from those script files and updates the corresponding code blocks in the markdown (`README`) files.
 1. 🚀 Commits and pushes the updated documentation back to the repository.
