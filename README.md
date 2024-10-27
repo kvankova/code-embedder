@@ -1,5 +1,5 @@
 # code-embedder
-<img src="assets/front.png" alt="Image" />
+<img src="assets/front2.png" alt="Image" />
 
 
 Keep your code snippets in README files up-to-date with Code-Embedder.
