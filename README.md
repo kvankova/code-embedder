@@ -27,7 +27,7 @@ This action looks for the following sections in the `README` file:
  ```language:path/to/script
  ```
 ````
-It will update the code snippets in `README` files with the content of the script located at `path/to/script` and push the changes to the repository.
+It will update the code snippets in `README` files with the content of the script located at `path/to/script` and push the changes to the repository 🚀.
 
 ## 💡 Example
 
