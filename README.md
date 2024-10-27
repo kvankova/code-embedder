@@ -11,7 +11,7 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
 ## 📚 Description
 
-Code Embedder is a GitHub Action that automatically updates code snippets in your `README` files. It scans your `README` for specially formatted code blocks that reference specific script files, then replaces the content of these blocks with the current contents of the referenced scripts. This ensures that your documentation always stays in sync with your actual code.
+**Code Embedder** is a GitHub Action that automatically updates code snippets in your `README` files. It scans your `README` for specially formatted code blocks that reference specific script files, then replaces the content of these blocks with the current contents of the referenced scripts. This ensures that your documentation always stays in sync with your actual code.
 
 Key features:
 - Automatic synchronization: Keep your `README` code examples up-to-date without manual intervention.
