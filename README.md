@@ -92,4 +92,4 @@ Use the `readme_paths` input to specify which README files to update. Multiple f
 This action performs the following steps:
 1. 🔎 Scans through the `README` files to identify referenced script files.
 1. 📝 Extracts the contents from those script files and updates the corresponding code blocks in the `README` files.
-1. 💾 Commits and pushes the updated documentation back to the repository.
+1. 🚀 Commits and pushes the updated documentation back to the repository.
