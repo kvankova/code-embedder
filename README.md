@@ -18,16 +18,16 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 - 🛠️ **Easy setup**: Simply add the action to your GitHub workflow and format your `README` code blocks.
 - 🌐 **Language agnostic**: Works with any programming language or file type.
 
-By using **Code Embedder**, you can focus on writing and updating your actual code 💻, while letting the action take care of keeping your documentation current 📚🔄. This reduces the risk of outdated or incorrect code examples in your project documentation 🚫🔍.
+By using **Code Embedder**, you can focus on writing and updating your actual code 💻, while letting the action take care of keeping your documentation current 📚🔄. This reduces the risk of outdated or incorrect code examples in your project documentation.
 
 ## 🔍 How it works
 
-This action looks for the following sections in the `README` file:
+The action looks for the following sections in the `README` file:
 ````md
  ```language:path/to/script
  ```
 ````
-It will update the code snippets in `README` files with the content of the script located at `path/to/script` and push the changes to the repository 🚀.
+It updates the code snippets in `README` files with the content of the script located at `path/to/script` and pushes the changes to the repository 🚀.
 
 ## 💡 Example
 
@@ -45,7 +45,7 @@ The `main.py` file contains the following code:
 print("Embedding successful")
 ```
 
-And once the workflow runs, the code block sections will be filled with the content of the script located at `main.py` and updated in the `README` file.
+Once the workflow runs, the code block sections are filled with the content of the script located at `main.py` and updated in the `README` file.
 
 ````md
 # README
@@ -86,11 +86,10 @@ jobs:
 ```
 You need to create a secret with write and repo permissions in the repository settings to pass it as `GITHUB_TOKEN` in the workflow.
 
-You can specify which `README` files you want to update using the `readme_paths` input. This input accepts one or more paths to markdown files, separated by spaces. For example: `README.md README2.md`. If not specified, the action will update `README.md` file at the root of the repository.
+Use the `readme_paths` input to specify which README files to update. Multiple files can be listed with spaces (e.g. `README.md README2.md`). By default, only `README.md` in the root directory is updated.
 
 ## 🔬 Under the hood
-This action:
-1. 📝 reads one or more `README` files from `readme_paths` input,
-1. 🔍 looks for script paths in the `README`s,
-1. 📄 reads the content of the scripts and embeds it in the `README`s at the corresponding locations,
-1. 🚀 pushes the changes to the repository.
+This action performs the following steps:
+1. 🔎 Scans through the `README` files to identify referenced script files.
+1. 📝 Extracts the contents from those script files and updates the corresponding code blocks in the `README` files.
+1. 💾 Commits and pushes the updated documentation back to the repository.
