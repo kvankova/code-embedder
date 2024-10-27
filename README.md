@@ -18,7 +18,7 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 - 🛠️ Easy setup: Simply add the action to your GitHub workflow and format your `README` code blocks.
 - 🌐 Language agnostic: Works with any programming language or file type.
 
-By using Code Embedder, you can focus on writing and updating your actual code, while letting the action take care of keeping your documentation current. This reduces the risk of outdated or incorrect code examples in your project documentation.
+By using **Code Embedder**, you can focus on writing and updating your actual code 💻, while letting the action take care of keeping your documentation current 📚🔄. This reduces the risk of outdated or incorrect code examples in your project documentation 🚫🔍, ensuring your `README` always reflects the latest changes 🆕✨.
 
 ## 🔍 How it works
 
