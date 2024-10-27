@@ -6,8 +6,6 @@ git remote set-url origin https://x-access-token:$GITHUB_TOKEN@github.com/$GITHU
 
 README_PATHS=$(find . -name "*.md" -print)
 
-echo "Found markdown files: $README_PATHS"
-
 BRANCH_NAME=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
 
 git pull origin ${BRANCH_NAME}
