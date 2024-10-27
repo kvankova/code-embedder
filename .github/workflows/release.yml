@@ -38,4 +38,4 @@ jobs:
           git config --global user.name "GitHub Action"
           git add pyproject.toml README.md
           git commit -m "Bump version to $TAG"
-          git push
+          git push origin main
