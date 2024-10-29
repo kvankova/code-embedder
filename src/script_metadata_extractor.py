@@ -1,6 +1,11 @@
 import re
+from typing import Protocol
 
 from src.script_metadata import ScriptMetadata
+
+
+class ScriptMetadataExtractorInterface(Protocol):
+    def extract(self, readme_content: list[str]) -> list[ScriptMetadata]: ...
 
 
 class ScriptMetadataExtractor:
