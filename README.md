@@ -140,7 +140,7 @@ You need to create a secret with write and repo permissions in the repository se
 - **Read** access to actions variables, metadata and secrets.
 - **Read** and **Write** access to actions, contents (code), commit statuses, pull requests, and workflows.
 
-Also you need to add read and write permissions to workflows in your repository. You can find it under `Settings > Action > General > Workflow permissions`. 
+Also you need to add read and write permissions to workflows in your repository. You can find it under `Settings > Action > General > Workflow permissions`.
 
 ## 🔬 Under the hood
 This action performs the following steps:
