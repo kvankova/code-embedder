@@ -3,7 +3,8 @@
 This is a test readme.
 
 This will be filled:
-```python:tests/data/example.py
+```python:tests/data/example_section.py:A
+print("Printing only section A")
 ```
 
 This won't be updated:
