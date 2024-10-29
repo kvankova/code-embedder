@@ -82,9 +82,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 ```
-You need to create a secret with write and repo permissions in the repository settings to pass it as `GITHUB_TOKEN` in the workflow. 🔑 **Fine-grained tokens** are preferred, and you need to set repository permissions to:
-- **Read** access to actions variables, metadata and secrets
-- **Read** and **Write** access to actions, code, commit statuses, pull requests, and workflows
+You need to create a secret with write and repo permissions in the repository settings to pass it as `GITHUB_TOKEN` in the workflow. 🔑 **Fine-grained tokens** are preferred, and you need to set repository permissions to obtain:
+- **Read** access to actions variables, metadata and secrets.
+- **Read** and **Write** access to actions, contents (code), commit statuses, pull requests, and workflows.
+
+Also you need to add read and write permissions to workflows in your repository. You can find it under `Settings > Action > General > Workflow permissions`. 
 
 ## 🔬 Under the hood
 This action performs the following steps:
