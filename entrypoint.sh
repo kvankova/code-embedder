@@ -10,7 +10,7 @@ BRANCH_NAME=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
 
 git pull origin ${BRANCH_NAME}
 
-echo "Updating $README_PATHS with code snippets..."
+echo "Searching for code snippets in $README_PATHS..."
 
 poetry run python /app/src/main.py --readme-paths $README_PATHS
 
@@ -19,7 +19,7 @@ if [ -n "$(git status -s)" ]; then
     echo "Changes to commit..."
     git add $README_PATHS
     git diff --staged
-    git commit -m "Update $README_PATHS"
+    git commit -m "docs: Apply Code Embedder"
     git push origin ${BRANCH_NAME}
 else
     echo "No changes to commit."
