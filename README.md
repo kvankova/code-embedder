@@ -127,8 +127,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Run code embedder
         uses: kvankova/code-embedder@v0.4.0
