@@ -120,6 +120,9 @@ name: Code Embedder
 
 on: pull_request
 
+permissions:
+  contents: write
+
 jobs:
   code_embedder:
     name: "Code embedder"
@@ -134,11 +137,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 ```
-You need to create a secret with write repository permissions. You can create a PAT token and add it as a secret in the repository settings (go to `Settings > Secrets and variables > Actions > New repository secret`). In case of setting up a 🔑 **fine-grained token**, you need to set the following repository permissions:
-- **Read** access to actions, metadata and secrets.
-- **Read** and **Write** access to contents (code).
-
-Also you need to add read and write permissions to workflows in your repository. You can find it under `Settings > Action > General > Workflow permissions`.
 
 ## 🔬 Under the hood
 This action performs the following steps:
