@@ -151,7 +151,10 @@ print("Embedding successful")
 With any changes to the section `A` in `main.py`, the code block section is updated in the `README` file with the next workflow run.
 
 ### 🧩 Object update
-The tag used for object update follows the same convention as the tag for section update, but you provide `object_name` instead of `section_name`, i.e. ` ```language:path/to/script:object_name`. The object name can be a function name or a class name.
+The tag used for object update follows the same convention as the tag for section update, but you provide `object_name` instead of `section_name`. The object name can be a function name or a class name.
+
+> [!Note]
+> The `object_name` must match exactly the name of the object (function, class) in the script file, including the case. If you define class `Person` in the script, you must use `Person` as the object name in the `README`, not lowercase `person`.
 
 For example, let's say we have the following `README` file:
 ````md
