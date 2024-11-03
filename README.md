@@ -15,9 +15,13 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
 ✨ **Key features**
 - 🔄 **Automatic synchronization**: Keep your `README` code examples up-to-date without manual intervention.
-- 📝 **Section support**: Update specific sections of the script in the `README`.
+
 - 🛠️ **Easy setup**: Simply add the action to your GitHub workflow and format your `README` code blocks.
-- 🌐 **Language agnostic**: Works with any programming language or file type.
+
+- 📝 **Section support**: Update specific sections of the script in the `README`.
+
+- 🧩 **Object support**: Update specific objects (functions, classes) in the `README`. *The latest version supports only 🐍 Python objects (other languages to be added soon).*
+
 
 By using **Code Embedder**, you can focus on writing and updating your actual code 💻, while letting the action take care of keeping your documentation current 📚🔄. This reduces the risk of outdated or incorrect code examples in your project documentation.
 
@@ -43,8 +47,20 @@ You must also add the following comment tags in the script file `path/to/script`
 ...
 [Comment sign] code_embedder:section_name end
 ```
-The comment sign is the one that is used in the script file, e.g. `#` for Python, or `//` for JavaScript. The `section_name` must be unique in the file, otherwise the action will not be able to identify the section.
+The comment sign is the one that is used in the script file, e.g. `#` for Python, or `//` for JavaScript. The `section_name` must be unique in the file, otherwise the action will use the first section found.
 
+### 🧩 **Object** updates
+In the `README` (or other markdown) file, the object of the script is marked with the following tag:
+````md
+ ```language:path/to/script:object_name
+ ```
+````
+
+> [!Note]
+> The object name must match exactly the name of the object (function, class) in the script file. Currently, only 🐍 Python objects are supported.
+
+> [!Note]
+> If there is a section with the same name as any object, the object definition will be used in the README instead of the section. To avoid this, use unique names for sections and objects!
 
 
 ## 💡 Examples
@@ -112,6 +128,64 @@ print("Embedding successful")
 
 With any changes to the section `A` in `main.py`, the code block section is updated in the `README` file with the next workflow run.
 
+### 🧩 Object update
+The tag used for object update follows the same convention as the tag for section update, but you provide `object_name` instead of `section_name`, i.e. ` ```language:path/to/script:object_name`. The object name can be a function name or a class name.
+
+For example, let's say we have the following `README` file:
+````md
+# README
+
+This is a readme.
+
+Function `print_hello` is defined as follows:
+```python:main.py:print_hello
+```
+
+Class `Person` is defined as follows:
+```python:main.py:Person
+```
+````
+
+The `main.py` file contains the following code:
+```python
+...
+def print_hello():
+    print("Hello, world!")
+...
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+    def say_hello(self):
+        print(f"Hello, {self.name}!")
+...
+```
+
+Once the workflow runs, the code block section will be updated in the `README` file with the content of the function `print_hello` and class `Person` from the script located at `main.py` and pushed to the repository 🚀.
+
+````md
+# README
+
+This is a readme.
+
+Function `print_hello` is defined as follows:
+```python:main.py:print_hello
+def print_hello():
+    print("Hello, world!")
+```
+
+Class `Person` is defined as follows:
+```python:main.py:Person
+class Person:
+    def __init__(self, name):
+        self.name = name
+    def say_hello(self):
+        print(f"Hello, {self.name}!")
+```
+````
+
+With any changes to the function `print_hello` or class `Person` in `main.py`, the code block sections are updated in the `README` file with the next workflow run.
+
 ## 🔧 Setup
 To use this action, you need to configure a yaml workflow file in `.github/workflows` folder (e.g. `.github/workflows/code-embedder.yaml`) with the following content:
 
@@ -140,6 +214,6 @@ jobs:
 
 ## 🔬 Under the hood
 This action performs the following steps:
-1. 🔎 Scans through the markdown (`README`) files to identify referenced script files (full script or section).
+1. 🔎 Scans through the markdown (`README`) files to identify referenced script files (full script, section or 🐍 Python object).
 1. 📝 Extracts the contents from those script files and updates the corresponding code blocks in the markdown (`README`) files.
 1. 🚀 Commits and pushes the updated documentation back to the repository.
