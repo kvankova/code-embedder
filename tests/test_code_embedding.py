@@ -38,4 +38,4 @@ def test_code_embedder(tmp_path) -> None:
         with open(temp_readme_path) as updated_file:
             updated_readme_content = updated_file.readlines()
 
-        assert expected_readme_content == updated_readme_content
+        assert updated_readme_content == expected_readme_content

@@ -58,6 +58,7 @@ from src.script_metadata import ScriptMetadata
                     readme_end=0,
                     content=(
                         "import re\n"
+                        "\n"
                         "# Function verifying an email is valid\n"
                         "def verify_email(email: str) -> bool:\n"
                         '    return re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
@@ -177,7 +178,7 @@ def test_read_full_script(
                     content=(
                         "def verify_email(email: str) -> bool:\n"
                         '    return re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
-                        '$", email) is not None\n'
+                        '$", email) is not None'
                     ),
                 ),
                 ScriptMetadata(
@@ -193,7 +194,7 @@ def test_read_full_script(
                         "\n"
                         "    # String representation of the class\n"
                         "    def __str__(self) -> str:\n"
-                        '        return f"Person(name={self.name}, age={self.age})"\n'
+                        '        return f"Person(name={self.name}, age={self.age})"'
                     ),
                 ),
             ],
