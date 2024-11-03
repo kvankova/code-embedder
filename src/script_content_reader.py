@@ -66,14 +66,14 @@ class ScriptContentReader:
         # Try extracting as object first, then fall back to section
         is_object, start, end = self._find_object_bounds(script)
         if is_object:
-            return self._convert_lines_to_content(lines, start, end)
+            return "\n".join(lines[start:end])
 
         # Extract section if not an object
         start, end = self._find_section_bounds(lines)
         if not self._validate_section_bounds(start, end, script):
             return ""
 
-        return self._convert_lines_to_content(lines, start, end)
+        return "\n".join(lines[start:end])
 
     def _validate_section_bounds(
         self, start: int | None, end: int | None, script: ScriptMetadata
@@ -100,25 +100,14 @@ class ScriptContentReader:
 
         return True
 
-    def _convert_lines_to_content(
-        self, lines: list[str], start: int | None, end: int | None
-    ) -> str:
-        if start is None or end is None:
-            return ""
-        return "\n".join(lines[start:end])
-
     def _find_section_bounds(self, lines: list[str]) -> tuple[int | None, int | None]:
-        start = None
-        end = None
-
         for i, line in enumerate(lines):
             if re.search(self._section_start_regex, line):
                 start = i + 1
             elif re.search(self._section_end_regex, line):
-                end = i
-                break
+                return start, i
 
-        return start, end
+        return None, None
 
     def _find_object_bounds(
         self, script: ScriptMetadata
