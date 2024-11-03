@@ -59,10 +59,12 @@ from src.script_metadata import ScriptMetadata
                     content=(
                         "import re\n"
                         "\n"
+                        "\n"
                         "# Function verifying an email is valid\n"
                         "def verify_email(email: str) -> bool:\n"
                         '    return re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
                         '$", email) is not None\n'
+                        "\n"
                         "\n"
                         "class Person:\n"
                         "    def __init__(self, name: str, age: int):\n"
@@ -206,4 +208,7 @@ def test_read_script_section(
 ):
     script_content_reader = ScriptContentReader()
 
-    assert script_content_reader._read_script_part(scripts) == expected_scripts
+    assert (
+        script_content_reader._update_script_content_with_extraction_part(scripts)
+        == expected_scripts
+    )
