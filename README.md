@@ -79,7 +79,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run code embedder
-        uses: kvankova/code-embedder@v0.4.0
+        uses: kvankova/code-embedder@v0.5.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
