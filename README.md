@@ -16,8 +16,8 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 ### ✨ Key features
 - 🔄 **Automatic synchronization**: Keep your `README` code examples up-to-date without manual intervention.
 - 🛠️ **Easy setup**: Simply add the action to your GitHub workflow and format your `README` code blocks.
-- 📝 **Section support**: Update specific sections of the script in the `README`.
-- 🧩 **Object support**: Update specific objects (functions, classes) in the `README`. *The latest version supports only 🐍 Python objects (other languages to be added soon).*
+- 📝 **Section support**: Update only specific sections of the script in the `README`.
+- 🧩 **Object support**: Update only specific objects (functions, classes) in the `README`. *The latest version supports only 🐍 Python objects (other languages to be added soon).*
 
 
 By using **Code Embedder**, you can focus on writing and updating your actual code 💻, while letting the action take care of keeping your documentation current 📚🔄. This reduces the risk of outdated or incorrect code examples in your project documentation.
@@ -57,7 +57,7 @@ In the `README` (or other markdown) file, the object of the script is marked wit
 > The object name must match exactly the name of the object (function, class) in the script file. Currently, only 🐍 Python objects are supported.
 
 > [!Note]
-> If there is a section with the same name as any object, the object definition will be used in the README instead of the section. To avoid this, use unique names for sections and objects!
+> If there is a section with the same name as any object, the object definition will be used in the README instead of the section. To avoid this, **use unique names for sections and objects!**
 
 
 ## 💡 Examples
