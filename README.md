@@ -13,13 +13,10 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
 **Code Embedder** is a GitHub Action that automatically updates code snippets in your markdown (`README`) files. It finds code blocks in your `README` that reference specific scripts, then replaces these blocks with the current content of those scripts. This keeps your documentation in sync with your code.
 
-✨ **Key features**
+### ✨ Key features
 - 🔄 **Automatic synchronization**: Keep your `README` code examples up-to-date without manual intervention.
-
 - 🛠️ **Easy setup**: Simply add the action to your GitHub workflow and format your `README` code blocks.
-
 - 📝 **Section support**: Update specific sections of the script in the `README`.
-
 - 🧩 **Object support**: Update specific objects (functions, classes) in the `README`. *The latest version supports only 🐍 Python objects (other languages to be added soon).*
 
 
