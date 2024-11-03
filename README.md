@@ -5,7 +5,7 @@
 ## **Code Embedder**
 Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
-[Description](#-description) • [How it works](#-how-it-works) • [Examples](#-examples) • [Setup](#-setup) • [Under the hood](#-under-the-hood)
+[Description](#-description) • [How it works](#-how-it-works) • [Setup](#-setup) • [Examples](#-examples) • [Under the hood](#-under-the-hood)
 </div>
 
 
@@ -59,6 +59,31 @@ In the `README` (or other markdown) file, the object of the script is marked wit
 > [!Note]
 > If there is a section with the same name as any object, the object definition will be used in the `README` instead of the section. To avoid this, **use unique names for sections and objects!**
 
+## 🔧 Setup
+To use this action, you need to configure a yaml workflow file in `.github/workflows` folder (e.g. `.github/workflows/code-embedder.yaml`) with the following content:
+
+```yaml
+name: Code Embedder
+
+on: pull_request
+
+permissions:
+  contents: write
+
+jobs:
+  code_embedder:
+    name: "Code embedder"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run code embedder
+        uses: kvankova/code-embedder@v0.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+```
 
 ## 💡 Examples
 
@@ -183,31 +208,6 @@ class Person:
 
 With any changes to the function `print_hello` or class `Person` in `main.py`, the code block sections are updated in the `README` file with the next workflow run.
 
-## 🔧 Setup
-To use this action, you need to configure a yaml workflow file in `.github/workflows` folder (e.g. `.github/workflows/code-embedder.yaml`) with the following content:
-
-```yaml
-name: Code Embedder
-
-on: pull_request
-
-permissions:
-  contents: write
-
-jobs:
-  code_embedder:
-    name: "Code embedder"
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Run code embedder
-        uses: kvankova/code-embedder@v0.4.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-```
 
 ## 🔬 Under the hood
 This action performs the following steps:
