@@ -206,4 +206,4 @@ def test_read_script_section(
 ):
     script_content_reader = ScriptContentReader()
 
-    assert script_content_reader._read_script_section(scripts) == expected_scripts
+    assert script_content_reader._read_script_part(scripts) == expected_scripts
