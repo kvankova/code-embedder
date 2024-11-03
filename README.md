@@ -57,7 +57,7 @@ In the `README` (or other markdown) file, the object of the script is marked wit
 > The object name must match exactly the name of the object (function, class) in the script file. Currently, only 🐍 Python objects are supported.
 
 > [!Note]
-> If there is a section with the same name as any object, the object definition will be used in the README instead of the section. To avoid this, **use unique names for sections and objects!**
+> If there is a section with the same name as any object, the object definition will be used in the `README` instead of the section. To avoid this, **use unique names for sections and objects!**
 
 
 ## 💡 Examples
