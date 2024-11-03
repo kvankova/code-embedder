@@ -8,11 +8,13 @@ def test_code_embedder(tmp_path) -> None:
         "tests/data/readme0.md",
         "tests/data/readme1.md",
         "tests/data/readme2.md",
+        "tests/data/readme3.md",
     ]
     expected_paths = [
         "tests/data/expected_readme0.md",
         "tests/data/expected_readme1.md",
         "tests/data/expected_readme2.md",
+        "tests/data/expected_readme3.md",
     ]
 
     # Create a temporary copy of the original file
