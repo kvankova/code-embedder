@@ -56,7 +56,7 @@ In the `README` (or other markdown) file, the object of the script is marked wit
 > [!Note]
 > The object name must match exactly the name of the object (function, class) in the script file. Currently, only 🐍 Python objects are supported.
 
-> [!Note]
+> [!Warning]
 > If there is a section with the same name as any object, the object definition will be used in the `README` instead of the section. To avoid this, **use unique names for sections and objects!**
 
 ## 🔧 Setup
@@ -153,7 +153,7 @@ With any changes to the section `A` in `main.py`, the code block section is upda
 ### 🧩 Object update
 The tag used for object update follows the same convention as the tag for section update, but you provide `object_name` instead of `section_name`. The object name can be a function name or a class name.
 
-> [!Note]
+> [!Warning]
 > The `object_name` must match exactly the name of the object (function, class) in the script file, including the case. If you define class `Person` in the script, you must use `Person` as the object name in the `README`, not lowercase `person`.
 
 For example, let's say we have the following `README` file:
