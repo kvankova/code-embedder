@@ -1,3 +1,4 @@
+import ast
 import re
 from typing import Protocol
 
@@ -16,68 +17,112 @@ class ScriptContentReader:
         self._section_end_regex = r".*code_embedder:.*end"
 
     def read(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
-        script_contents = self._read_full_script(scripts)
-        return self._process_scripts(script_contents)
+        scripts_with_full_contents = self._read_full_script(scripts)
+        return self._process_scripts(scripts_with_full_contents)
 
     def _read_full_script(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
-        script_contents: list[ScriptMetadata] = []
+        scripts_with_full_contents: list[ScriptMetadata] = []
 
         for script in scripts:
             try:
                 with open(script.path) as script_file:
                     script.content = script_file.read()
 
-                script_contents.append(script)
+                scripts_with_full_contents.append(script)
 
             except FileNotFoundError:
                 logger.error(f"Error: {script.path} not found. Skipping.")
 
-        return script_contents
+        return scripts_with_full_contents
 
     def _process_scripts(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
         full_scripts = [script for script in scripts if not script.extraction_part]
-        scripts_with_sections = [script for script in scripts if script.extraction_part]
+        scripts_with_extraction_part = [script for script in scripts if script.extraction_part]
 
-        if scripts_with_sections:
-            scripts_with_sections = self._read_script_section(scripts_with_sections)
+        if scripts_with_extraction_part:
+            scripts_with_extraction_part = self._update_script_content_with_extraction_part(
+                scripts_with_extraction_part
+            )
 
-        return full_scripts + scripts_with_sections
+        return full_scripts + scripts_with_extraction_part
 
-    def _read_script_section(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
+    def _update_script_content_with_extraction_part(
+        self, scripts: list[ScriptMetadata]
+    ) -> list[ScriptMetadata]:
         return [
             ScriptMetadata(
                 path=script.path,
                 extraction_part=script.extraction_part,
                 readme_start=script.readme_start,
                 readme_end=script.readme_end,
-                content=self._extract_section(script),
+                content=self._extract_part(script),
             )
             for script in scripts
         ]
 
-    def _extract_section(self, script: ScriptMetadata) -> str:
+    def _extract_part(self, script: ScriptMetadata) -> str:
         lines = script.content.split("\n")
-        section_bounds = self._find_section_bounds(lines)
 
-        if not section_bounds:
-            logger.error(f"Section {script.extraction_part} not found in {script.path}")
+        # Try extracting as object first, then fall back to section
+        is_object, start, end = self._find_object_bounds(script)
+        if is_object:
+            return "\n".join(lines[start:end])
+
+        # Extract section if not an object
+        start, end = self._find_section_bounds(lines)
+        if not self._validate_section_bounds(start, end, script):
             return ""
 
-        start, end = section_bounds
         return "\n".join(lines[start:end])
 
-    def _find_section_bounds(self, lines: list[str]) -> tuple[int, int] | None:
-        section_start = None
-        section_end = None
+    def _validate_section_bounds(
+        self, start: int | None, end: int | None, script: ScriptMetadata
+    ) -> bool:
+        if not start and not end:
+            logger.error(
+                f"Part {script.extraction_part} not found in {script.path}. Skipping."
+            )
+            return False
 
+        if not start:
+            logger.error(
+                f"Start of section {script.extraction_part} not found in {script.path}. "
+                "Skipping."
+            )
+            return False
+
+        if not end:
+            logger.error(
+                f"End of section {script.extraction_part} not found in {script.path}. "
+                "Skipping."
+            )
+            return False
+
+        return True
+
+    def _find_section_bounds(self, lines: list[str]) -> tuple[int | None, int | None]:
         for i, line in enumerate(lines):
             if re.search(self._section_start_regex, line):
-                section_start = i + 1
+                start = i + 1
             elif re.search(self._section_end_regex, line):
-                section_end = i
-                break
+                return start, i
 
-        if section_start is None or section_end is None:
-            return None
+        return None, None
 
-        return section_start, section_end
+    def _find_object_bounds(
+        self, script: ScriptMetadata
+    ) -> tuple[bool, int | None, int | None]:
+        tree = ast.parse(script.content)
+
+        for node in ast.walk(tree):
+            if (
+                isinstance(node, ast.FunctionDef)
+                | isinstance(node, ast.AsyncFunctionDef)
+                | isinstance(node, ast.ClassDef)
+            ):
+                if script.extraction_part == getattr(node, "name", None):
+                    start = getattr(node, "lineno", None)
+                    end = getattr(node, "end_lineno", None)
+                    return True, start - 1 if start else None, end
+
+        return False, None, None

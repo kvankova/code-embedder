@@ -23,6 +23,13 @@ from src.script_metadata import ScriptMetadata
                     readme_end=0,
                     content="",
                 ),
+                ScriptMetadata(
+                    path="tests/data/example_python_objects.py",
+                    extraction_part="",
+                    readme_start=0,
+                    readme_end=0,
+                    content="",
+                ),
             ],
             [
                 ScriptMetadata(
@@ -44,8 +51,32 @@ from src.script_metadata import ScriptMetadata
                         "# code_embedder:A end\n"
                     ),
                 ),
+                ScriptMetadata(
+                    path="tests/data/example_python_objects.py",
+                    extraction_part="",
+                    readme_start=0,
+                    readme_end=0,
+                    content=(
+                        "import re\n"
+                        "\n"
+                        "\n"
+                        "# Function verifying an email is valid\n"
+                        "def verify_email(email: str) -> bool:\n"
+                        '    return re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
+                        '$", email) is not None\n'
+                        "\n"
+                        "\n"
+                        "class Person:\n"
+                        "    def __init__(self, name: str, age: int):\n"
+                        "        self.name = name\n"
+                        "        self.age = age\n"
+                        "\n"
+                        "    # String representation of the class\n"
+                        "    def __str__(self) -> str:\n"
+                        '        return f"Person(name={self.name}, age={self.age})"\n'
+                    ),
+                ),
             ],
-            id="one_full_script_one_script_with_section",
         ),
     ],
 )
@@ -81,6 +112,50 @@ def test_read_full_script(
                         "# code_embedder:A end\n"
                     ),
                 ),
+                ScriptMetadata(
+                    path="tests/data/example_python_objects.py",
+                    extraction_part="verify_email",
+                    readme_start=0,
+                    readme_end=0,
+                    content=(
+                        "import re\n"
+                        "# Function verifying an email is valid\n"
+                        "def verify_email(email: str) -> bool:\n"
+                        '    return re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
+                        '$", email) is not None\n'
+                        "\n"
+                        "class Person:\n"
+                        "    def __init__(self, name: str, age: int):\n"
+                        "        self.name = name\n"
+                        "        self.age = age\n"
+                        "\n"
+                        "    # String representation of the class\n"
+                        "    def __str__(self) -> str:\n"
+                        '        return f"Person(name={self.name}, age={self.age})"\n'
+                    ),
+                ),
+                ScriptMetadata(
+                    path="tests/data/example_python_objects.py",
+                    extraction_part="Person",
+                    readme_start=0,
+                    readme_end=0,
+                    content=(
+                        "import re\n"
+                        "# Function verifying an email is valid\n"
+                        "def verify_email(email: str) -> bool:\n"
+                        '    return re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
+                        '$", email) is not None\n'
+                        "\n"
+                        "class Person:\n"
+                        "    def __init__(self, name: str, age: int):\n"
+                        "        self.name = name\n"
+                        "        self.age = age\n"
+                        "\n"
+                        "    # String representation of the class\n"
+                        "    def __str__(self) -> str:\n"
+                        '        return f"Person(name={self.name}, age={self.age})"\n'
+                    ),
+                ),
             ],
             [
                 ScriptMetadata(
@@ -97,8 +172,34 @@ def test_read_full_script(
                     readme_end=0,
                     content='print("Printing only section A")',
                 ),
+                ScriptMetadata(
+                    path="tests/data/example_python_objects.py",
+                    extraction_part="verify_email",
+                    readme_start=0,
+                    readme_end=0,
+                    content=(
+                        "def verify_email(email: str) -> bool:\n"
+                        '    return re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+'
+                        '$", email) is not None'
+                    ),
+                ),
+                ScriptMetadata(
+                    path="tests/data/example_python_objects.py",
+                    extraction_part="Person",
+                    readme_start=0,
+                    readme_end=0,
+                    content=(
+                        "class Person:\n"
+                        "    def __init__(self, name: str, age: int):\n"
+                        "        self.name = name\n"
+                        "        self.age = age\n"
+                        "\n"
+                        "    # String representation of the class\n"
+                        "    def __str__(self) -> str:\n"
+                        '        return f"Person(name={self.name}, age={self.age})"'
+                    ),
+                ),
             ],
-            id="one_full_script_one_script_with_section",
         ),
     ],
 )
@@ -107,4 +208,7 @@ def test_read_script_section(
 ):
     script_content_reader = ScriptContentReader()
 
-    assert script_content_reader._read_script_section(scripts) == expected_scripts
+    assert (
+        script_content_reader._update_script_content_with_extraction_part(scripts)
+        == expected_scripts
+    )
