@@ -20,6 +20,7 @@ class ScriptMetadataExtractor:
         self.extraction_type_mapping = {
             self._object_separator: "object",
             self._section_separator: "section",
+            "full": "full",
         }
 
     def extract(self, readme_content: list[str]) -> list[ScriptMetadata]:
@@ -44,7 +45,7 @@ class ScriptMetadataExtractor:
     def _start_new_block(self, line: str, row: int) -> dict | None:
         tag_items = line.split(self._path_separator)
         path = tag_items[1].strip()
-        extraction_type = tag_items[2].strip() if len(tag_items) > 2 else None
+        extraction_type = tag_items[2].strip() if len(tag_items) > 2 else "full"
 
         if extraction_type not in self.extraction_type_mapping.keys():
             logger.error(
