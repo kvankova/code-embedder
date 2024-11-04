@@ -12,6 +12,7 @@ from src.script_metadata import ScriptMetadata
                 ScriptMetadata(
                     path="tests/data/example.py",
                     extraction_part="",
+                    extraction_type="full",
                     readme_start=0,
                     readme_end=0,
                     content="",
@@ -19,6 +20,7 @@ from src.script_metadata import ScriptMetadata
                 ScriptMetadata(
                     path="tests/data/example_section.py",
                     extraction_part="A",
+                    extraction_type="section",
                     readme_start=0,
                     readme_end=0,
                     content="",
@@ -26,6 +28,7 @@ from src.script_metadata import ScriptMetadata
                 ScriptMetadata(
                     path="tests/data/example_python_objects.py",
                     extraction_part="",
+                    extraction_type="full",
                     readme_start=0,
                     readme_end=0,
                     content="",
@@ -35,6 +38,7 @@ from src.script_metadata import ScriptMetadata
                 ScriptMetadata(
                     path="tests/data/example.py",
                     extraction_part="",
+                    extraction_type="full",
                     readme_start=0,
                     readme_end=0,
                     content='print("Hello, World! from script")\n',
@@ -42,6 +46,7 @@ from src.script_metadata import ScriptMetadata
                 ScriptMetadata(
                     path="tests/data/example_section.py",
                     extraction_part="A",
+                    extraction_type="section",
                     readme_start=0,
                     readme_end=0,
                     content=(
@@ -54,6 +59,7 @@ from src.script_metadata import ScriptMetadata
                 ScriptMetadata(
                     path="tests/data/example_python_objects.py",
                     extraction_part="",
+                    extraction_type="full",
                     readme_start=0,
                     readme_end=0,
                     content=(
@@ -96,6 +102,7 @@ def test_read_full_script(
                 ScriptMetadata(
                     path="tests/data/example.py",
                     extraction_part="no_section",
+                    extraction_type="section",
                     readme_start=0,
                     readme_end=0,
                     content='print("Hello, World! from script")\n',
@@ -103,6 +110,7 @@ def test_read_full_script(
                 ScriptMetadata(
                     path="tests/data/example_section.py",
                     extraction_part="A",
+                    extraction_type="section",
                     readme_start=0,
                     readme_end=0,
                     content=(
@@ -115,6 +123,7 @@ def test_read_full_script(
                 ScriptMetadata(
                     path="tests/data/example_python_objects.py",
                     extraction_part="verify_email",
+                    extraction_type="object",
                     readme_start=0,
                     readme_end=0,
                     content=(
@@ -137,6 +146,7 @@ def test_read_full_script(
                 ScriptMetadata(
                     path="tests/data/example_python_objects.py",
                     extraction_part="Person",
+                    extraction_type="object",
                     readme_start=0,
                     readme_end=0,
                     content=(
@@ -161,6 +171,7 @@ def test_read_full_script(
                 ScriptMetadata(
                     path="tests/data/example.py",
                     extraction_part="no_section",
+                    extraction_type="section",
                     readme_start=0,
                     readme_end=0,
                     content="",
@@ -168,6 +179,7 @@ def test_read_full_script(
                 ScriptMetadata(
                     path="tests/data/example_section.py",
                     extraction_part="A",
+                    extraction_type="section",
                     readme_start=0,
                     readme_end=0,
                     content='print("Printing only section A")',
@@ -175,6 +187,7 @@ def test_read_full_script(
                 ScriptMetadata(
                     path="tests/data/example_python_objects.py",
                     extraction_part="verify_email",
+                    extraction_type="object",
                     readme_start=0,
                     readme_end=0,
                     content=(
@@ -186,6 +199,7 @@ def test_read_full_script(
                 ScriptMetadata(
                     path="tests/data/example_python_objects.py",
                     extraction_part="Person",
+                    extraction_type="object",
                     readme_start=0,
                     readme_end=0,
                     content=(
