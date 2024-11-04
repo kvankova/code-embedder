@@ -57,6 +57,13 @@ class ScriptMetadataExtractor:
 
         extraction_part = tag_items[3].strip() if len(tag_items) > 3 else None
 
+        if not extraction_part and extraction_type != "full":
+            logger.error(
+                f"Extraction part is not provided for {extraction_type} extraction type. "
+                "Skipping."
+            )
+            return None
+
         return {
             "start": row,
             "path": path,
