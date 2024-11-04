@@ -157,7 +157,7 @@ The tag used for object update follows the same convention as the tag for sectio
 - use `o:` instead of `s:`
 - use `object_name`
 
-> [!Warning]
+> [!Note]
 > The `object_name` must match exactly the name of the object (function, class) in the script file, including the case. If you define class `Person` in the script, you must use `Person` as the object name in the `README`, not lowercase `person`.
 
 For example, let's say we have the following `README` file:
