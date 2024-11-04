@@ -53,6 +53,7 @@ class ScriptContentReader:
             ScriptMetadata(
                 path=script.path,
                 extraction_part=script.extraction_part,
+                extraction_type=script.extraction_type,
                 readme_start=script.readme_start,
                 readme_end=script.readme_end,
                 content=self._extract_part(script),
