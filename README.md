@@ -38,6 +38,8 @@ In the `README` (or other markdown) file, the section of the script is marked wi
  ```language:path/to/script:s:section_name
  ```
 ````
+Notice that the `path/to/script` is followed by `s:` in the tag to indicate that the section `section_name` is being updated.
+
 You must also add the following comment tags in the script file `path/to/script`, where the section is located:
 ```
 [Comment sign] code_embedder:section_name start
@@ -52,6 +54,7 @@ In the `README` (or other markdown) file, the object of the script is marked wit
  ```language:path/to/script:o:object_name
  ```
 ````
+Notice that the `path/to/script` is followed by `o:` in the tag to indicate that the object `object_name` is being updated.
 
 > [!Note]
 > The object name must match exactly the name of the object (function, class) in the script file. Currently, only 🐍 Python objects are supported.
