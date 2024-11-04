@@ -50,13 +50,13 @@ test_cases = [
         id="two_tagged_scripts_one_untagged_script",
     ),
     pytest.param(
-        ["```python:main.py:section_name", "print('Hello, World!')", "```"],
-        [create_script_metadata(0, 2, "main.py", "section_name")],
+        ["```python:main.py:s:section_name", "print('Hello, World!')", "```"],
+        [create_script_metadata(0, 2, "main.py", "section", "section_name")],
         id="one_tagged_script_with_section_name",
     ),
     pytest.param(
         [
-            "```python:main.py:section_name",
+            "```python:main.py:s:section_name",
             "print('Hello, World!')",
             "```",
             "```python:example.py",
@@ -64,25 +64,37 @@ test_cases = [
             "```",
         ],
         [
-            create_script_metadata(0, 2, "main.py", "section_name"),
+            create_script_metadata(0, 2, "main.py", "section", "section_name"),
             create_script_metadata(3, 5, "example.py"),
         ],
         id="one_tagged_script_with_section_name_one_tagged_script",
     ),
     pytest.param(
         [
-            "```python:main.py:A",
+            "```python:main.py:s:A",
             "print('Hello, World!')",
             "```",
-            "```python:example.py:B",
+            "```python:example.py:s:B",
             "print('Hello, World!')",
             "```",
         ],
         [
-            create_script_metadata(0, 2, "main.py", "A"),
-            create_script_metadata(3, 5, "example.py", "B"),
+            create_script_metadata(0, 2, "main.py", "section", "A"),
+            create_script_metadata(3, 5, "example.py", "section", "B"),
         ],
         id="two_tagged_scripts_with_section_names",
+    ),
+    pytest.param(
+        [
+            "```python:main.py:o:print_hello",
+            "def print_hello() -> None:",
+            "    print('Hello, World!')",
+            "```",
+        ],
+        [
+            create_script_metadata(0, 3, "main.py", "object", "print_hello"),
+        ],
+        id="one_tagged_script_with_object_name",
     ),
 ]
 

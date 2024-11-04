@@ -6,12 +6,12 @@ This is a test README file for testing the code embedding process.
 
 This section contains examples of Python objects.
 
-```python:tests/data/example_python_objects.py:verify_email
+```python:tests/data/example_python_objects.py:o:verify_email
 def verify_email(email: str) -> bool:
     return re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email) is not None
 ```
 
-```python:tests/data/example_python_objects.py:Person
+```python:tests/data/example_python_objects.py:o:Person
 class Person:
     def __init__(self, name: str, age: int):
         self.name = name

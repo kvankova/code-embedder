@@ -3,7 +3,7 @@
 This is a test readme.
 
 This will be filled:
-```python:tests/data/example_section.py:A
+```python:tests/data/example_section.py:s:A
 print("Printing only section A")
 ```
 

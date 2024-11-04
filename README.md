@@ -35,9 +35,12 @@ In the `README` (or other markdown) file, the full script is marked with the fol
 ### 📂 **Section** updates
 In the `README` (or other markdown) file, the section of the script is marked with the following tag:
 ````md
- ```language:path/to/script:section_name
+ ```language:path/to/script:s:section_name
  ```
 ````
+> [!Note]
+>Notice that the `path/to/script` is followed by `s:` in the tag to indicate that the section `section_name` is being updated.
+
 You must also add the following comment tags in the script file `path/to/script`, where the section is located:
 ```
 [Comment sign] code_embedder:section_name start
@@ -49,15 +52,14 @@ The comment sign is the one that is used in the script file, e.g. `#` for Python
 ### 🧩 **Object** updates
 In the `README` (or other markdown) file, the object of the script is marked with the following tag:
 ````md
- ```language:path/to/script:object_name
+ ```language:path/to/script:o:object_name
  ```
 ````
+> [!Note]
+> Notice that the `path/to/script` is followed by `o:` in the tag to indicate that the object `object_name` is being updated.
 
 > [!Note]
-> The object name must match exactly the name of the object (function, class) in the script file. Currently, only 🐍 Python objects are supported.
-
-> [!Warning]
-> If there is a section with the same name as any object, the object definition will be used in the `README` instead of the section. To avoid this, **use unique names for sections and objects!**
+> The object name must match exactly the name of the object (function, class) in the script file, including the case (e.g. `Person` not `person`). Currently, only 🐍 Python objects are supported.
 
 ## 🔧 Setup
 To use this action, you need to configure a yaml workflow file in `.github/workflows` folder (e.g. `.github/workflows/code-embedder.yaml`) with the following content:
@@ -124,7 +126,7 @@ Now we have the following `README` file:
 
 This is a readme.
 
-```python:main.py:A
+```python:main.py:s:A
 ```
 ````
 The `main.py` file contains the following code:
@@ -143,7 +145,7 @@ Once the workflow runs, the code block section will be updated in the `README` f
 
 This is a readme.
 
-```python:main.py:A
+```python:main.py:s:A
 print("Embedding successful")
 ```
 ````
@@ -151,7 +153,9 @@ print("Embedding successful")
 With any changes to the section `A` in `main.py`, the code block section is updated in the `README` file with the next workflow run.
 
 ### 🧩 Object update
-The tag used for object update follows the same convention as the tag for section update, but you provide `object_name` instead of `section_name`. The object name can be a function name or a class name.
+The tag used for object update follows the same convention as the tag for section update with the following changes:
+- use `o:` instead of `s:`
+- use `object_name`
 
 > [!Warning]
 > The `object_name` must match exactly the name of the object (function, class) in the script file, including the case. If you define class `Person` in the script, you must use `Person` as the object name in the `README`, not lowercase `person`.
@@ -163,11 +167,11 @@ For example, let's say we have the following `README` file:
 This is a readme.
 
 Function `print_hello` is defined as follows:
-```python:main.py:print_hello
+```python:main.py:o:print_hello
 ```
 
 Class `Person` is defined as follows:
-```python:main.py:Person
+```python:main.py:o:Person
 ```
 ````
 
@@ -194,13 +198,13 @@ Once the workflow runs, the code block section will be updated in the `README` f
 This is a readme.
 
 Function `print_hello` is defined as follows:
-```python:main.py:print_hello
+```python:main.py:o:print_hello
 def print_hello():
     print("Hello, world!")
 ```
 
 Class `Person` is defined as follows:
-```python:main.py:Person
+```python:main.py:o:Person
 class Person:
     def __init__(self, name):
         self.name = name

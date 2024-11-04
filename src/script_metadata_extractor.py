@@ -1,6 +1,8 @@
 import re
 from typing import Protocol
 
+from loguru import logger
+
 from src.script_metadata import ScriptMetadata
 
 
@@ -13,6 +15,13 @@ class ScriptMetadataExtractor:
         self._code_block_start_regex = r"^```.*?:"
         self._code_block_end = "```"
         self._path_separator = ":"
+        self._object_separator = "o"
+        self._section_separator = "s"
+        self.extraction_type_mapping = {
+            self._object_separator: "object",
+            self._section_separator: "section",
+            "full": "full",
+        }
 
     def extract(self, readme_content: list[str]) -> list[ScriptMetadata]:
         scripts = []
@@ -33,17 +42,41 @@ class ScriptMetadataExtractor:
     def _is_code_block_end(self, line: str) -> bool:
         return line.strip() == self._code_block_end
 
-    def _start_new_block(self, line: str, row: int) -> dict:
+    def _start_new_block(self, line: str, row: int) -> dict | None:
         tag_items = line.split(self._path_separator)
         path = tag_items[1].strip()
-        extraction_part = tag_items[2].strip() if len(tag_items) > 2 else None
-        return {"start": row, "path": path, "extraction_part": extraction_part}
+        extraction_type = tag_items[2].strip() if len(tag_items) > 2 else "full"
+
+        if extraction_type not in self.extraction_type_mapping.keys():
+            logger.error(
+                f"Unknown extraction type {extraction_type}. Allowed are only "
+                f"`{self._object_separator}` for object and "
+                f"`{self._section_separator}` for section. Skipping."
+            )
+            return None
+
+        extraction_part = tag_items[3].strip() if len(tag_items) > 3 else None
+
+        if not extraction_part and extraction_type != "full":
+            logger.error(
+                f"Extraction part is not provided for {extraction_type} extraction type. "
+                "Skipping."
+            )
+            return None
+
+        return {
+            "start": row,
+            "path": path,
+            "extraction_type": self.extraction_type_mapping[extraction_type],
+            "extraction_part": extraction_part,
+        }
 
     def _finish_current_block(self, block: dict, end_row: int) -> ScriptMetadata:
         return ScriptMetadata(
             readme_start=block["start"],
             readme_end=end_row,
             path=block["path"],
+            extraction_type=block["extraction_type"],
             extraction_part=block["extraction_part"],
             content="",
         )
