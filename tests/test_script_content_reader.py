@@ -9,7 +9,7 @@ from src.script_metadata import ScriptMetadata
 def create_script_metadata(
     path: str,
     extraction_type: Literal["full", "section", "object"] = "full",
-    extraction_part: str = "",
+    extraction_part: str | None = None,
     content: str = "",
 ) -> ScriptMetadata:
     return ScriptMetadata(
