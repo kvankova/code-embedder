@@ -13,6 +13,11 @@ name: Test
 description: Description
 ```
 
+This will be filled:
+```python:tests/data/example_section.py:s:B
+print("Printing only section B")
+```
+
 This won't be updated:
 ```
 print("Hello, World!")

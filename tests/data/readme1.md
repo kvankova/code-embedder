@@ -4,13 +4,16 @@ This is a test readme.
 
 This will be filled:
 ```python:tests/data/example_section.py:s:A
-print("Printing only section A")
 ```
 
 This won't be updated:
 ```yaml
 name: Test
 description: Description
+```
+
+This will be filled:
+```python:tests/data/example_section.py:s:B
 ```
 
 This won't be updated:
