@@ -223,7 +223,19 @@ This action performs the following steps:
 1. 🚀 Commits and pushes the updated documentation back to the repository.
 
 ## 🤝 Contributing
-We welcome contributions to improve the action!
+We welcome contributions to improve this tool!
 - If you have an idea for a **new feature** ✨, open a [new feature request](https://github.com/kvankova/code-embedder/issues/new?labels=enhancement&template=feature_request.yaml) on GitHub.
 - If you spot a **bug** 🐛, open a [new issue](https://github.com/kvankova/code-embedder/issues/new/choose) on GitHub.
 - If you want to **contribute to the code**, please pick an issue that is not assigned to anyone and comment on it, so that we know you are working on it.
+
+## 🛠️ Development
+You can clone this project locally by using the following command:
+```bash
+git clone https://github.com/kvankova/code-embedder.git
+cd code-embedder
+```
+Install the dependencies by using the following command:
+```bash
+pip install poetry==1.8.4
+poetry install --with dev
+```
