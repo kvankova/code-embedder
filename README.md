@@ -225,11 +225,11 @@ We welcome contributions to improve this tool!
 1. Fork this project
 1. Install [poetry](https://python-poetry.org/docs/#installation)
 1. Install the dependencies by using the following command:
-  ```bash
-  poetry install --with dev
-  ```
+    ```bash
+    poetry install --with dev
+    ```
 1. Make changes to the code and run the tests to make sure everything works as expected. ✅
-  ```bash
-  poetry run pytest
-  ```
+    ```bash
+    poetry run pytest
+    ```
 1. Commit your changes, push them to the repository 🚀, and open a new pull request.
