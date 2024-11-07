@@ -2,6 +2,7 @@ name: Check PR title
 
 on:
   pull_request:
+    types: [edited]
 
 permissions:
   pull-requests: write
