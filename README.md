@@ -5,26 +5,26 @@
 ## **Code Embedder**
 Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
-[Description](#-description) • [How it works](#-how-it-works) • [Setup](#-setup) • [Examples](#-examples) • [Contributing](#-contributing) • [Development](#️-development)
+[Description](#-description) • [How it works](#-how-it-works) • [Setup - Github Action](#-setup---github-action) • [Setup - Pre-commit Hook](#-setup---pre-commit-hook) • [Examples](#-examples) • [Contributing](#-contributing) • [Development](#️-development)
 </div>
 
 
 ## 📚 Description
 
-**Code Embedder** is a GitHub Action that automatically updates code snippets in your markdown (`README`) files. It finds code blocks in your `README` that reference specific scripts, then replaces these blocks with the current content of those scripts. This keeps your documentation in sync with your code.
+**Code Embedder** is a **GitHub Action** and a **pre-commit hook** that automatically updates code snippets in your markdown (`README`) files. It finds code blocks in your `README` that reference specific scripts, then replaces these blocks with the current content of those scripts. This keeps your documentation in sync with your code.
 
 ### ✨ Key features
 - 🔄 **Automatic synchronization**: Keep your `README` code examples up-to-date without manual intervention.
-- 🛠️ **Easy setup**: Simply add the action to your GitHub workflow and format your `README` code blocks.
+- 🛠️ **Easy setup**: Simply add the action to your GitHub workflow / pre-commit hook and format your `README` code blocks.
 - 📝 **Section support**: Update only specific sections of the script in the `README`.
 - 🧩 **Object support**: Update only specific objects (functions, classes) in the `README`. *The latest version supports only 🐍 Python objects (other languages to be added soon).*
 
 
-By using **Code Embedder**, you can focus on writing and updating your actual code 💻, while letting the action take care of keeping your documentation current 📚🔄. This reduces the risk of outdated or incorrect code examples in your project documentation.
+By using **Code Embedder**, you can focus on writing and updating your actual code 💻, while letting the Code-Embedder take care of keeping your documentation current 📚🔄. This reduces the risk of outdated or incorrect code examples in your project documentation.
 
 ## 🔍 How it works
 
-The action looks for specific tags in all markdown (`README`) files, which indicate the script file path (and optionally the section to update), then it updates the code block sections in the `README` files with the content. The changes are then pushed to the repository 🚀.
+The **Code Embedder** looks for specific tags in all markdown (`README`) files, which indicate the script file path (and optionally the section to update), then it updates the code block sections in the `README` files with the content. In case of using it as a Github Action, the changes are then pushed to the repository 🚀.
 
 ### 📄 **Full script** updates
 In the `README` (or other markdown) file, the full script is marked with the following tag:
@@ -47,7 +47,7 @@ You must also add the following comment tags in the script file `path/to/script`
 ...
 [Comment sign] code_embedder:section_name end
 ```
-The comment sign is the one that is used in the script file, e.g. `#` for Python, or `//` for JavaScript. The `section_name` must be unique in the file, otherwise the action will use the first section found.
+The comment sign is the one that is used in the script file, e.g. `#` for Python, or `//` for JavaScript. The `section_name` must be unique in the file, otherwise the Code-Embedder will use the first section found.
 
 ### 🧩 **Object** updates
 In the `README` (or other markdown) file, the object of the script is marked with the following tag:
@@ -61,8 +61,8 @@ In the `README` (or other markdown) file, the object of the script is marked wit
 > [!Note]
 > The object name must match exactly the name of the object (function, class) in the script file, including the case (e.g. `Person` not `person`). Currently, only 🐍 Python objects are supported.
 
-## 🔧 Setup
-To use this action, you need to configure a yaml workflow file in `.github/workflows` folder (e.g. `.github/workflows/code-embedder.yaml`) with the following content:
+## 🔧 Setup - Github Action
+Use **Code Embedder** as a Github Action by adding the following to your `.github/workflows/code-embedder.yaml` file:
 
 ```yaml
 name: Code Embedder
@@ -89,6 +89,15 @@ jobs:
 
 ```
 
+## 🔧 Setup - Pre-commit Hook
+Use **Code Embedder** as a pre-commit hook by adding the following to your `.pre-commit-config.yaml` file:
+```yaml
+- repo: https://github.com/kvankova/code-embedder
+  rev: v0.5.2
+  hooks:
+    - id: code-embedder
+```
+
 ## 💡 Examples
 
 ### 📄 Full script update
@@ -107,7 +116,7 @@ The `main.py` file contains the following code:
 print("Embedding successful")
 ```
 
-Once the workflow runs, the code block sections are filled with the content of the script located at `main.py` and updated in the `README` file.
+Once the workflow / pre-commit hook runs, the code block sections are filled with the content of the script located at `main.py` and updated in the `README` file.
 
 ````md
 # README
@@ -118,7 +127,7 @@ This is a readme.
 print("Embedding successful")
 ```
 ````
-With any changes to `main.py`, the code block section is updated in the `README` file with the next workflow run.
+With any changes to `main.py`, the code block section is updated in the `README` file with the next workflow / pre-commit hook run.
 
 ### 📂 Section update
 
@@ -140,7 +149,7 @@ print("Embedding successful")
 # code_embedder:A end
 ```
 
-Once the workflow runs, the code block section will be updated in the `README` file with the content of the section `A` from the script located at `main.py` and pushed to the repository 🚀.
+Once the workflow / pre-commit hook runs, the code block section will be updated in the `README` file with the content of the section `A` from the script located at `main.py` (in case of using it as a Github Action, the changes are then pushed to the repository 🚀).
 
 ````md
 # README
@@ -152,7 +161,7 @@ print("Embedding successful")
 ```
 ````
 
-With any changes to the section `A` in `main.py`, the code block section is updated in the `README` file with the next workflow run.
+With any changes to the section `A` in `main.py`, the code block section is updated in the `README` file with the next workflow / pre-commit hook run.
 
 ### 🧩 Object update
 The tag used for object update follows the same convention as the tag for section update with the following changes:
@@ -192,7 +201,7 @@ class Person:
 ...
 ```
 
-Once the workflow runs, the code block section will be updated in the `README` file with the content of the function `print_hello` and class `Person` from the script located at `main.py` and pushed to the repository 🚀.
+Once the workflow / pre-commit hook runs, the code block section will be updated in the `README` file with the content of the function `print_hello` and class `Person` from the script located at `main.py` (in case of using it as a Github Action, the changes are then pushed to the repository 🚀).
 
 ````md
 # README
@@ -215,10 +224,10 @@ class Person:
 ```
 ````
 
-With any changes to the function `print_hello` or class `Person` in `main.py`, the code block sections are updated in the `README` file with the next workflow run.
+With any changes to the function `print_hello` or class `Person` in `main.py`, the code block sections are updated in the `README` file with the next workflow / pre-commit hook run.
 
 ## 🤝 Contributing
-We welcome contributions to improve this tool!
+We welcome contributions to improve this package!
 - If you have an idea for a **new feature** ✨, open a [new feature request](https://github.com/kvankova/code-embedder/issues/new?labels=enhancement&template=feature_request.yaml) on GitHub.
 - If you spot a **bug** 🐛, open a [new issue](https://github.com/kvankova/code-embedder/issues/new/choose) on GitHub.
 - If you want to **contribute to the code**, please pick an issue that is not assigned to anyone and comment on it, so that we know you are working on it.
