@@ -228,7 +228,7 @@ We welcome contributions to improve this tool!
     ```bash
     poetry install --with dev
     ```
-1. Make changes to the code and run the tests to make sure everything works as expected. ✅
+1. Make changes to the codebase and run the tests to make sure everything works as expected. ✅
     ```bash
     poetry run pytest
     ```
