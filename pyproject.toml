@@ -6,6 +6,9 @@ authors = ["Katerina Vankova <katerinavankova1@gmail.com>"]
 license = "MIT"
 packages = [{include = "src"}]
 
+[tool.poetry.scripts]
+code-embedder = "src.main:main"
+
 [tool.poetry.dependencies]
 python = "^3.11"
 argparse = "^1.4.0"

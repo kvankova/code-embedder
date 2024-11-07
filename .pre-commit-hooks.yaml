@@ -1,0 +1,7 @@
+- id: code-embedder
+  name: Code embedder
+  description: >
+    Keep your code snippets in README up to date
+  language: python
+  entry: poetry run code-embedder
+  types: [markdown]
