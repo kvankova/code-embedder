@@ -83,7 +83,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Run code embedder
-        uses: kvankova/code-embedder@v0.5.1
+        uses: kvankova/code-embedder@v0.5.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
