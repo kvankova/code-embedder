@@ -5,7 +5,7 @@
 ## **Code Embedder**
 Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
-[Description](#-description) • [How it works](#-how-it-works) • [Setup](#-setup) • [Examples](#-examples) • [Under the hood](#-under-the-hood)
+[Description](#-description) • [How it works](#-how-it-works) • [Setup](#-setup) • [Examples](#-examples) • [Contributing](#-contributing) • [Development](#️-development)
 </div>
 
 
@@ -215,9 +215,21 @@ class Person:
 
 With any changes to the function `print_hello` or class `Person` in `main.py`, the code block sections are updated in the `README` file with the next workflow run.
 
+## 🤝 Contributing
+We welcome contributions to improve this tool!
+- If you have an idea for a **new feature** ✨, open a [new feature request](https://github.com/kvankova/code-embedder/issues/new?labels=enhancement&template=feature_request.yaml) on GitHub.
+- If you spot a **bug** 🐛, open a [new issue](https://github.com/kvankova/code-embedder/issues/new/choose) on GitHub.
+- If you want to **contribute to the code**, please pick an issue that is not assigned to anyone and comment on it, so that we know you are working on it.
 
-## 🔬 Under the hood
-This action performs the following steps:
-1. 🔎 Scans through the markdown (`README`) files to identify referenced script files (full script, section or 🐍 Python object).
-1. 📝 Extracts the contents from those script files and updates the corresponding code blocks in the markdown (`README`) files.
-1. 🚀 Commits and pushes the updated documentation back to the repository.
+## 🛠️ Development
+1. Fork this project
+1. Install [poetry](https://python-poetry.org/docs/#installation)
+1. Install the dependencies by using the following command:
+    ```bash
+    poetry install --with dev
+    ```
+1. Make changes to the codebase and run the tests to make sure everything works as expected. ✅
+    ```bash
+    poetry run pytest
+    ```
+1. Commit your changes, push them to the repository 🚀, and open a new pull request.
