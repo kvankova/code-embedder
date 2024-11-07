@@ -90,12 +90,28 @@ jobs:
 ```
 
 ## 🔧 Setup - Pre-commit Hook
-Use **Code Embedder** as a pre-commit hook by adding the following to your `.pre-commit-config.yaml` file:
+Use **Code Embedder** as a pre-commit hook,
+A) install via pip install code-embedder==0.5.2 or poetry add code-embedder==0.5.2, or use repo link below
+B) Update `.pre-commit-config.yaml` file:
 ```yaml
 - repo: https://github.com/kvankova/code-embedder
   rev: v0.5.2
   hooks:
     - id: code-embedder
+      name: Code embedder
+      entry: code-embedder
+      language: system
+```
+If you use `poetry`, you can update the `entry` to `poetry run code-embedder`.
+
+or as B) Update your `.pre-commit-hooks.yaml` file to use the installed hook:
+```yaml
+- repo: local
+  hooks:
+    - id: code-embedder
+      name: Code embedder
+      entry: code-embedder
+      language: system
 ```
 
 ## 💡 Examples

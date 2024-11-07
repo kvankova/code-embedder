@@ -3,6 +3,7 @@ name = "code-embedder"
 version = "v0.5.2"
 description = "Embed python code from script to markdown"
 authors = ["Katerina Vankova <katerinavankova1@gmail.com>"]
+readme = "README.md"
 license = "MIT"
 packages = [{include = "src"}]
 
@@ -11,7 +12,6 @@ code-embedder = "src.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-argparse = "^1.4.0"
 loguru = "^0.7.2"
 
 [tool.poetry.group.dev.dependencies]
