@@ -51,7 +51,7 @@ def create_script_metadata(
                     "\n"
                     "# code_embedder:B start\n"
                     'print("Printing only section B")\n'
-                    "# code_embedder:B end"
+                    "# code_embedder:B end\n"
                 ),
             ),
         ),
