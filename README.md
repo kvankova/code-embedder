@@ -222,13 +222,14 @@ We welcome contributions to improve this tool!
 - If you want to **contribute to the code**, please pick an issue that is not assigned to anyone and comment on it, so that we know you are working on it.
 
 ## 🛠️ Development
-You can fork this project and then install the dependencies by using the following command:
+1. Fork this project
+1. Install [poetry](https://python-poetry.org/docs/#installation)
+1. Install the dependencies by using the following command:
 ```bash
-pip install poetry==1.8.4
 poetry install --with dev
 ```
-Make changes to the code and run the tests to make sure everything works as expected. ✅
+1. Make changes to the code and run the tests to make sure everything works as expected. ✅
 ```bash
 poetry run pytest
 ```
-Commit your changes, push them to the repository 🚀, and open a new pull request.
+1. Commit your changes, push them to the repository 🚀, and open a new pull request.
