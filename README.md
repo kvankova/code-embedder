@@ -215,13 +215,6 @@ class Person:
 
 With any changes to the function `print_hello` or class `Person` in `main.py`, the code block sections are updated in the `README` file with the next workflow run.
 
-
-## 🔬 Under the hood
-This action performs the following steps:
-1. 🔎 Scans through the markdown (`README`) files to identify referenced script files (full script, section or 🐍 Python object).
-1. 📝 Extracts the contents from those script files and updates the corresponding code blocks in the markdown (`README`) files.
-1. 🚀 Commits and pushes the updated documentation back to the repository.
-
 ## 🤝 Contributing
 We welcome contributions to improve this tool!
 - If you have an idea for a **new feature** ✨, open a [new feature request](https://github.com/kvankova/code-embedder/issues/new?labels=enhancement&template=feature_request.yaml) on GitHub.
