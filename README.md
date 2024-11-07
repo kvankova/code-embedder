@@ -5,7 +5,7 @@
 ## **Code Embedder**
 Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
-[Description](#-description) • [How it works](#-how-it-works) • [Setup](#-setup) • [Examples](#-examples) • [Under the hood](#-under-the-hood) • [Contributing](#-contributing)
+[Description](#-description) • [How it works](#-how-it-works) • [Setup](#-setup) • [Examples](#-examples) • [Contributing](#-contributing) • [Development](#️-development)
 </div>
 
 
