@@ -227,7 +227,7 @@ You can fork this project and then install the dependencies by using the followi
 pip install poetry==1.8.4
 poetry install --with dev
 ```
-Make changes to the code and run the tests to make sure everything works as expected:
+Make changes to the code and run the tests to make sure everything works as expected. ✅
 ```bash
 poetry run pytest
 ```
