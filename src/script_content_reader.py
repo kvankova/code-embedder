@@ -13,8 +13,8 @@ class ScriptContentReaderInterface(Protocol):
 
 class ScriptContentReader:
     def __init__(self) -> None:
-        self._section_start_regex = r".*code_embedder:.*start"
-        self._section_end_regex = r".*code_embedder:.*end"
+        self._section_start_regex = r".*code_embedder:section_name start"
+        self._section_end_regex = r".*code_embedder:section_name end"
 
     def read(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
         scripts_with_full_contents = self._read_full_script(scripts)
@@ -68,7 +68,9 @@ class ScriptContentReader:
             start, end = self._extract_object_part(script)
 
         elif script.extraction_type == "section":
-            start, end = self._extract_section_part(lines)
+            start, end = self._extract_section_part(
+                lines=lines, section=script.extraction_part
+            )
             if not self._validate_section_bounds(start, end, script):
                 return ""
 
@@ -96,11 +98,21 @@ class ScriptContentReader:
 
         return None, None
 
-    def _extract_section_part(self, lines: list[str]) -> tuple[int | None, int | None]:
+    def _extract_section_part(
+        self, lines: list[str], section: str | None = None
+    ) -> tuple[int | None, int | None]:
+        if not section:
+            return None, None
+
+        updated_section_start_regex = self._section_start_regex.replace(
+            "section_name", section
+        )
+        updated_section_end_regex = self._section_end_regex.replace("section_name", section)
+
         for i, line in enumerate(lines):
-            if re.search(self._section_start_regex, line):
+            if re.search(updated_section_start_regex, line):
                 start = i + 1
-            elif re.search(self._section_end_regex, line):
+            elif re.search(updated_section_end_regex, line):
                 return start, i
 
         return None, None
