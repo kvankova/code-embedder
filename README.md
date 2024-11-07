@@ -5,7 +5,7 @@
 ## **Code Embedder**
 Seamlessly update code snippets in your **README** files! 🔄📝🚀
 
-[Description](#-description) • [How it works](#-how-it-works) • [Setup](#-setup) • [Examples](#-examples) • [Under the hood](#-under-the-hood)
+[Description](#-description) • [How it works](#-how-it-works) • [Setup](#-setup) • [Examples](#-examples) • [Under the hood](#-under-the-hood) • [Contributing](#-contributing)
 </div>
 
 
@@ -221,3 +221,9 @@ This action performs the following steps:
 1. 🔎 Scans through the markdown (`README`) files to identify referenced script files (full script, section or 🐍 Python object).
 1. 📝 Extracts the contents from those script files and updates the corresponding code blocks in the markdown (`README`) files.
 1. 🚀 Commits and pushes the updated documentation back to the repository.
+
+## 🤝 Contributing
+We welcome contributions to improve the action!
+- If you have an idea for a **new feature** ✨, open a [new feature request](https://github.com/kvankova/code-embedder/issues/new?labels=enhancement&template=feature_request.yaml) on GitHub.
+- If you spot a **bug** 🐛, open a [new issue](https://github.com/kvankova/code-embedder/issues/new/choose) on GitHub.
+- If you want to **contribute to the code**, please pick an issue that is not assigned to anyone and comment on it, so that we know you are working on it.
