@@ -129,6 +129,7 @@ Alternatively, you can reference the repository directly in your `.pre-commit-co
 ```
 
 ### 🔧 Options
+Command `code-embedder run` has the following options:
 
 | Option| Description |
 | --------- | ------- |
