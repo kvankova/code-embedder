@@ -95,7 +95,7 @@ jobs:
 You can set up **Code Embedder** as a pre-commit hook using either:
 <ol type="A">
    <li>Installation via PyPI</li>
-   <li>Direct repository reference in your `.pre-commit-config.yaml`</li>
+   <li>Direct repository reference in your <code>.pre-commit-config.yaml</code> file</li>
 </ol>
 
 ### A. Installation via PyPI
