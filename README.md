@@ -16,7 +16,7 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 ### ✨ Key features
 - 🔄 **Automatic synchronization**: Keep your `README` code examples up-to-date without manual intervention.
 - 🛠️ **Easy setup**: Simply add the action to your GitHub workflow / pre-commit hook and format your `README` code blocks.
-- 📝 **Section support**: Update only specific sections of the script in the `README`.
+- 📝 **Section support**: Update only specific sections of the script in the `README`. This is language agnostic.
 - 🧩 **Object support**: Update only specific objects (functions, classes) in the `README`. *The latest version supports only 🐍 Python objects (other languages to be added soon).*
 
 
@@ -24,7 +24,7 @@ By using **Code Embedder**, you can focus on writing and updating your actual co
 
 ## 🔍 How it works
 
-The **Code Embedder** looks for specific tags in all markdown (`README`) files, which indicate the script file path (and optionally the section to update), then it updates the code block sections in the `README` files with the content. In case of using it as a Github Action, the changes are then pushed to the repository 🚀.
+The **Code Embedder** looks for specific tags in all markdown (`README`) files, which indicate what script part to update in the code block, then it updates them with the content of the script part. In case of using it as a Github Action, the changes are then pushed to the repository 🚀.
 
 ### 📄 **Full script** updates
 In the `README` (or other markdown) file, the full script is marked with the following tag:
@@ -47,7 +47,9 @@ You must also add the following comment tags in the script file `path/to/script`
 ...
 [Comment sign] code_embedder:section_name end
 ```
-The comment sign is the one that is used in the script file, e.g. `#` for Python, or `//` for JavaScript. The `section_name` must be unique in the file, otherwise the Code-Embedder will use the first section found.
+The comment sign is the one that is used in the script file, e.g. `#` for Python, or `//` for JavaScript. For example, in python script you add `# code_embedder:A start` and `# code_embedder:A end` to new lines to mark the start and end of the section `A` you want to include in the `README`.
+
+The `section_name` must be unique in the file, otherwise the Code-Embedder will use the first section found.
 
 ### 🧩 **Object** updates
 In the `README` (or other markdown) file, the object of the script is marked with the following tag:
@@ -59,7 +61,7 @@ In the `README` (or other markdown) file, the object of the script is marked wit
 > Notice that the `path/to/script` is followed by `o:` in the tag to indicate that the object `object_name` is being updated.
 
 > [!Note]
-> The object name must match exactly the name of the object (function, class) in the script file, including the case (e.g. `Person` not `person`). Currently, only 🐍 Python objects are supported.
+> The object name must match exactly the name of the object (function, class) in the script file, including the case (e.g. if class is `Person` then object name must be `Person`, not `person`). Currently, only 🐍 Python objects are supported.
 
 ## 🔧 Setup - Github Action
 Use **Code Embedder** as a Github Action by adding the following to your `.github/workflows/code-embedder.yaml` file:
@@ -90,9 +92,35 @@ jobs:
 ```
 
 ## 🔧 Setup - Pre-commit Hook
-Use **Code Embedder** as a pre-commit hook,
-A) install via pip install code-embedder==0.5.2 or poetry add code-embedder==0.5.2, or use repo link below
-B) Update `.pre-commit-config.yaml` file:
+You can use **Code Embedder** as a pre-commit hook in two ways:
+A. Install from PyPI
+B. Link repository in `.pre-commit-config.yaml` file.
+
+#### A. Install from PyPI
+By using `pip`:
+```bash
+pip install code-embedder==0.5.2
+```
+
+By using `poetry`:
+```bash
+poetry add code-embedder@0.5.2
+```
+
+Your `.pre-commit-config.yaml` file should look like this:
+```yaml
+- repo: local
+  hooks:
+    - id: code-embedder
+      name: Code embedder
+      entry: code-embedder
+      language: python
+      types: [markdown]
+```
+If you use `poetry`, you can set `entry` to `poetry run code-embedder`.
+
+#### B. Link repository in `.pre-commit-config.yaml` file.
+If you prefer to pull the repository from the internet, your `.pre-commit-config.yaml` file should look like this:
 ```yaml
 - repo: https://github.com/kvankova/code-embedder
   rev: v0.5.2
@@ -100,19 +128,10 @@ B) Update `.pre-commit-config.yaml` file:
     - id: code-embedder
       name: Code embedder
       entry: code-embedder
-      language: system
+      language: python
+      types: [markdown]
 ```
 If you use `poetry`, you can update the `entry` to `poetry run code-embedder`.
-
-or as B) Update your `.pre-commit-hooks.yaml` file to use the installed hook:
-```yaml
-- repo: local
-  hooks:
-    - id: code-embedder
-      name: Code embedder
-      entry: code-embedder
-      language: system
-```
 
 ## 💡 Examples
 
@@ -132,7 +151,7 @@ The `main.py` file contains the following code:
 print("Embedding successful")
 ```
 
-Once the workflow / pre-commit hook runs, the code block sections are filled with the content of the script located at `main.py` and updated in the `README` file.
+Once code-embedder runs, the code block sections are filled with the content of the script located at `main.py` and updated in the `README` file.
 
 ````md
 # README
@@ -143,7 +162,7 @@ This is a readme.
 print("Embedding successful")
 ```
 ````
-With any changes to `main.py`, the code block section is updated in the `README` file with the next workflow / pre-commit hook run.
+With any changes to `main.py`, the code block section is updated in the `README` file with the next code-embedder run.
 
 ### 📂 Section update
 
@@ -165,7 +184,7 @@ print("Embedding successful")
 # code_embedder:A end
 ```
 
-Once the workflow / pre-commit hook runs, the code block section will be updated in the `README` file with the content of the section `A` from the script located at `main.py` (in case of using it as a Github Action, the changes are then pushed to the repository 🚀).
+Once code-embedder runs, the code block section will be updated in the `README` file with the content of the section `A` from the script located at `main.py` (in case of using it as a Github Action, the changes are then pushed to the repository 🚀).
 
 ````md
 # README
@@ -177,7 +196,7 @@ print("Embedding successful")
 ```
 ````
 
-With any changes to the section `A` in `main.py`, the code block section is updated in the `README` file with the next workflow / pre-commit hook run.
+With any changes to the section `A` in `main.py`, the code block section is updated in the `README` file with the next code-embedder run.
 
 ### 🧩 Object update
 The tag used for object update follows the same convention as the tag for section update with the following changes:
@@ -217,7 +236,7 @@ class Person:
 ...
 ```
 
-Once the workflow / pre-commit hook runs, the code block section will be updated in the `README` file with the content of the function `print_hello` and class `Person` from the script located at `main.py` (in case of using it as a Github Action, the changes are then pushed to the repository 🚀).
+Once code-embedder runs, the code block section will be updated in the `README` file with the content of the function `print_hello` and class `Person` from the script located at `main.py` (in case of using it as a Github Action, the changes are then pushed to the repository 🚀).
 
 ````md
 # README
@@ -240,7 +259,7 @@ class Person:
 ```
 ````
 
-With any changes to the function `print_hello` or class `Person` in `main.py`, the code block sections are updated in the `README` file with the next workflow / pre-commit hook run.
+With any changes to the function `print_hello` or class `Person` in `main.py`, the code block sections are updated in the `README` file with the next code-embedder run.
 
 ## 🤝 Contributing
 We welcome contributions to improve this package!
