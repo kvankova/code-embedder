@@ -12,6 +12,10 @@ echo "Searching for code snippets in $README_PATHS..."
 
 poetry run python /app/src/main.py
 
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
 if [ -n "$(git status -s)" ]; then
 
     echo "Changes to commit..."
