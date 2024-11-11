@@ -130,9 +130,9 @@ Alternatively, you can reference the repository directly in your `.pre-commit-co
 
 ### 🔧 Options
 
-| <div style="width:250px">Option</div> | Description |
+| Option| Description |
 | --------- | ------- |
-| `--all-files` | Process all files in the repository. In pre-commit hook, it by default checks only the changed files. |
+| <nobr> `--all-files` </nobr> | Process all files in the repository. In pre-commit hook, it by default checks only the changed files. |
 
 ## 💡 Examples
 
