@@ -25,8 +25,6 @@ def run(
         logger.info("No markdown files found in the current repository.")
         exit(0)
 
-    logger.info(f"Found {len(readme_paths)} markdown files in the current repository.")
-
     script_metadata_extractor = ScriptMetadataExtractor()
     script_content_reader = ScriptContentReader()
     code_embedder = CodeEmbedder(
@@ -34,8 +32,8 @@ def run(
         script_metadata_extractor=script_metadata_extractor,
         script_content_reader=script_content_reader,
     )
-    code_embedder()
 
+    code_embedder()
     logger.info("Code Embedder finished successfully.")
 
 
