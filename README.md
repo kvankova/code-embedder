@@ -16,7 +16,7 @@ Seamlessly update code snippets in your **README** files! 🔄📝🚀
 ### ✨ Key features
 - 🔄 **Automatic synchronization**: Keep your `README` code examples up-to-date without manual intervention.
 - 🛠️ **Easy setup**: Simply add the action to your GitHub workflow / pre-commit hook and format your `README` code blocks.
-- 📝 **Section support**: Update only specific sections of the script in the `README`. This is language agnostic.
+- 📝 **Section support**: Update only specific sections of the script in the `README`. This is **language agnostic**.
 - 🧩 **Object support**: Update only specific objects (functions, classes) in the `README`. *The latest version supports only 🐍 Python objects (other languages to be added soon).*
 
 
