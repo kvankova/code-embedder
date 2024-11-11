@@ -92,19 +92,16 @@ jobs:
 ```
 
 ## 🔧 Setup - Pre-commit Hook
-You can use **Code Embedder** as a pre-commit hook in two ways:
-- Install from PyPI
-- Link repository in `.pre-commit-config.yaml` file.
+You can set up **Code Embedder** as a pre-commit hook using either:
+<ol type="A">
+   <li>Installation via PyPI</li>
+   <li>Direct repository reference in your `.pre-commit-config.yaml`</li>
+</ol>
 
-#### A. Install from PyPI
-By using `pip`:
+### A. Installation via PyPI
+Install the package:
 ```bash
 pip install code-embedder==0.5.2
-```
-
-By using `poetry`:
-```bash
-poetry add code-embedder@0.5.2
 ```
 
 Your `.pre-commit-config.yaml` file should look like this:
@@ -117,10 +114,9 @@ Your `.pre-commit-config.yaml` file should look like this:
       language: python
       types: [markdown]
 ```
-If you use `poetry`, you can set `entry` to `poetry run code-embedder`.
 
-#### B. Link repository in `.pre-commit-config.yaml` file.
-If you prefer to pull the repository from the internet, your `.pre-commit-config.yaml` file should look like this:
+### B. Direct repository reference
+Alternatively, you can reference the repository directly in your `.pre-commit-config.yaml` file:
 ```yaml
 - repo: https://github.com/kvankova/code-embedder
   rev: v0.5.2
@@ -131,7 +127,6 @@ If you prefer to pull the repository from the internet, your `.pre-commit-config
       language: python
       types: [markdown]
 ```
-If you use `poetry`, you can update the `entry` to `poetry run code-embedder`.
 
 ## 💡 Examples
 
