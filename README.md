@@ -24,7 +24,7 @@ By using **Code Embedder**, you can focus on writing and updating your actual co
 
 ## 🔍 How it works
 
-The **Code Embedder** looks for specific tags in all markdown (`README`) files, which indicate what script part to update in the code block, then it updates them with the content of the script part. In case of using it as a Github Action, the changes are then pushed to the repository 🚀.
+The **Code Embedder** scans markdown files for special tags that specify which parts of your scripts to embed. When it finds these tags, it automatically updates the code blocks with the latest content from your source files. When used as a GitHub Action, any changes are automatically committed and pushed to your repository 🚀.
 
 ### 📄 **Full script** updates
 In the `README` (or other markdown) file, the full script is marked with the following tag:
@@ -131,8 +131,8 @@ Alternatively, you can reference the repository directly in your `.pre-commit-co
 ### 🔧 Options
 Command `code-embedder run` has the following options:
 
-| Option| Description |
-| --------- | ------- |
+| Option | Description |
+| ------ | ----------- |
 | `--all-files` | Process all files in the repository. In pre-commit hook, it by default checks only the changed files. |
 
 ## 💡 Examples
