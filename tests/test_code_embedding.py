@@ -61,3 +61,13 @@ def test_code_embedder(
         updated_readme_content = updated_file.readlines()
 
     assert updated_readme_content == expected_readme_content
+
+
+def test_code_embedder_unknown_path() -> None:
+    code_embedder = CodeEmbedder(
+        readme_paths=["tests/data/readme4.md"],
+        script_metadata_extractor=ScriptMetadataExtractor(),
+        script_content_reader=ScriptContentReader(),
+    )
+    with pytest.raises(FileNotFoundError):
+        code_embedder()

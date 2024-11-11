@@ -10,7 +10,7 @@ git pull origin ${BRANCH_NAME}
 
 echo "Searching for code snippets in $README_PATHS..."
 
-poetry run python /app/src/main.py --log-level INFO
+poetry run python /app/src/main.py
 
 if [ -n "$(git status -s)" ]; then
 
