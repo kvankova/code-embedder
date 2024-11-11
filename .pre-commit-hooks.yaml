@@ -3,4 +3,5 @@
   description: >
     Keep your code snippets in README up-to-date!
   entry: code-embedder
+  language: python
   types: [markdown]
