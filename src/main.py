@@ -1,6 +1,7 @@
 import glob
 import sys
 
+import typer
 from loguru import logger
 
 from src.code_embedding import CodeEmbedder
@@ -9,8 +10,11 @@ from src.script_metadata_extractor import ScriptMetadataExtractor
 
 logger.add(sys.stderr, level="ERROR")
 
+app = typer.Typer()
 
-def main():
+
+@app.command(help="Embed code from scripts to markdown files.")
+def run():
     readme_paths = glob.glob("**/*.md", recursive=True)
 
     if not readme_paths:
@@ -32,4 +36,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    app()
