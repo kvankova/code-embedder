@@ -27,11 +27,19 @@ jobs:
           sed -i "s/^version = .*/version = \"$TAG\"/" pyproject.toml
           cat pyproject.toml
 
-      - name: Update README.md
+      - name: Update README.md - Github Action version
         env:
           TAG: ${{ steps.read_tag.outputs.TAG }}
         run: |
           sed -i "s/kvankova\/code-embedder@.*/kvankova\/code-embedder@$TAG/" README.md
+          cat README.md
+
+      - name: Update README.md - Pre-commit version
+        env:
+          TAG: ${{ steps.read_tag.outputs.TAG }}
+        run: |
+          sed -i "s/code-embedder==.*/code-embedder==$TAG/" README.md
+          sed -i "s/rev: v[0-9]\+\.[0-9]\+\.[0-9]\+/rev: $TAG/" README.md
           cat README.md
 
       - name: Commit and push changes
