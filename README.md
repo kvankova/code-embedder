@@ -93,8 +93,8 @@ jobs:
 
 ## 🔧 Setup - Pre-commit Hook
 You can use **Code Embedder** as a pre-commit hook in two ways:
-A. Install from PyPI
-B. Link repository in `.pre-commit-config.yaml` file.
+- Install from PyPI
+- Link repository in `.pre-commit-config.yaml` file.
 
 #### A. Install from PyPI
 By using `pip`:
