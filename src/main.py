@@ -5,16 +5,24 @@ import typer
 from loguru import logger
 
 from src.code_embedding import CodeEmbedder
+from src.log_level import LogLevel
 from src.script_content_reader import ScriptContentReader
 from src.script_metadata_extractor import ScriptMetadataExtractor
 
-logger.add(sys.stderr, level="ERROR")
-
-app = typer.Typer()
+app = typer.Typer(rich_markup_mode="rich")
 
 
 @app.command(help="Embed code from scripts to markdown files.")
-def run():
+def run(
+    log_level: LogLevel = typer.Option(
+        LogLevel.ERROR, "--log-level", help="Log level, use INFO, WARNING, or ERROR."
+    ),
+    changed_files: list[str] = typer.Argument(None, help="List of changed files to process."),
+):
+    logger.remove()
+    print(log_level.value)
+    logger.add(sys.stderr, level=log_level.value)
+
     readme_paths = glob.glob("**/*.md", recursive=True)
 
     if not readme_paths:
@@ -36,4 +44,4 @@ def run():
 
 
 if __name__ == "__main__":
-    app()
+    typer.run(run)

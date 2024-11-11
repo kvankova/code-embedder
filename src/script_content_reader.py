@@ -31,7 +31,7 @@ class ScriptContentReader:
                 scripts_with_full_contents.append(script)
 
             except FileNotFoundError:
-                logger.error(f"Error: {script.path} not found. Skipping.")
+                logger.error(f"File {script.path} not found. Skipping.")
 
         return scripts_with_full_contents
 
