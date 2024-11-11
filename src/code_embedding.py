@@ -23,7 +23,7 @@ class CodeEmbedder:
     def _process_readme(self, readme_path: str) -> None:
         readme_content = self._read_readme(readme_path)
         if not readme_content:
-            logger.info(f"Empty README in path {readme_path}. Skipping.")
+            logger.info(f"Empty markdown file {readme_path}. Skipping.")
             return
 
         scripts = self._extract_scripts(readme_content=readme_content, readme_path=readme_path)
@@ -40,7 +40,6 @@ class CodeEmbedder:
 
     def _read_readme(self, readme_path: str) -> list[str]:
         if not readme_path.endswith(".md"):
-            logger.error("README path must end with .md")
             raise ValueError("README path must end with .md")
 
         with open(readme_path) as readme_file:

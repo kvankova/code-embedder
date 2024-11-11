@@ -1,8 +1,6 @@
 import re
 from typing import Protocol
 
-from loguru import logger
-
 from src.script_metadata import ScriptMetadata
 
 
@@ -48,21 +46,19 @@ class ScriptMetadataExtractor:
         extraction_type = tag_items[2].strip() if len(tag_items) > 2 else "full"
 
         if extraction_type not in self.extraction_type_mapping.keys():
-            logger.error(
+            raise ValueError(
                 f"Unknown extraction type {extraction_type}. Allowed are only "
                 f"`{self._object_separator}` for object and "
-                f"`{self._section_separator}` for section. Skipping."
+                f"`{self._section_separator}` for section."
             )
-            return None
 
         extraction_part = tag_items[3].strip() if len(tag_items) > 3 else None
 
         if not extraction_part and extraction_type != "full":
-            logger.error(
-                f"Extraction part is not provided for {extraction_type} extraction type. "
-                "Skipping."
+            raise ValueError(
+                f"Extraction part (section or object name) is not provided for "
+                f"{extraction_type} extraction type."
             )
-            return None
 
         return {
             "start": row,
