@@ -48,6 +48,7 @@ def test_code_embedder(
 
     code_embedder = CodeEmbedder(
         readme_paths=[str(temp_readme_path)],
+        changed_files=None,
         script_metadata_extractor=ScriptMetadataExtractor(),
         script_content_reader=ScriptContentReader(),
     )
@@ -66,6 +67,7 @@ def test_code_embedder(
 def test_code_embedder_unknown_path() -> None:
     code_embedder = CodeEmbedder(
         readme_paths=["tests/data/readme4.md"],
+        changed_files=None,
         script_metadata_extractor=ScriptMetadataExtractor(),
         script_content_reader=ScriptContentReader(),
     )
