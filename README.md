@@ -98,7 +98,7 @@ You can set up **Code Embedder** as a pre-commit hook using either:
    <li>Direct repository reference in your <code>.pre-commit-config.yaml</code> file</li>
 </ol>
 
-You can also use the `--all-files` option to process all files in the repository.
+You can run the code-embedder using the `code-embedder run --all-files` command. In pre-commit hook, it checks only the changed files.
 
 ### A. Installation via PyPI
 Install the package:
