@@ -97,6 +97,7 @@ You can set up **Code Embedder** as a pre-commit hook using either:
    <li>Installation via PyPI</li>
    <li>Direct repository reference in your <code>.pre-commit-config.yaml</code> file</li>
 </ol>
+You can also use the `--all-files` option to process all files in the repository.
 
 ### A. Installation via PyPI
 Install the package:
@@ -110,7 +111,7 @@ Your `.pre-commit-config.yaml` file should look like this:
   hooks:
     - id: code-embedder
       name: Code embedder
-      entry: code-embedder
+      entry: code-embedder run
       language: python
       types: [markdown]
 ```
@@ -123,7 +124,7 @@ Alternatively, you can reference the repository directly in your `.pre-commit-co
   hooks:
     - id: code-embedder
       name: Code embedder
-      entry: code-embedder
+      entry: code-embedder run
       language: python
       types: [markdown]
 ```
