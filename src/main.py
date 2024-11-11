@@ -10,14 +10,15 @@ from src.script_metadata_extractor import ScriptMetadataExtractor
 
 app = typer.Typer()
 
+# Setup logging for the script running as pre-commit hook
+logger.remove()
+logger.add(sys.stderr, level="ERROR")
+
 
 @app.command(help="Embed code from scripts to markdown files.")
 def run(
     changed_files: list[str] = typer.Argument(None, help="List of changed files to process."),
 ):
-    logger.remove()
-    logger.add(sys.stderr, level="INFO")
-
     readme_paths = glob.glob("**/*.md", recursive=True)
 
     if not readme_paths:
@@ -39,4 +40,7 @@ def run(
 
 
 if __name__ == "__main__":
+    # Update logging for the script running as github action
+    logger.remove()
+    logger.add(sys.stderr, level="INFO")
     typer.run(run)
