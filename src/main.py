@@ -20,7 +20,6 @@ def run(
     changed_files: list[str] = typer.Argument(None, help="List of changed files to process."),
 ):
     logger.remove()
-    print(log_level.value)
     logger.add(sys.stderr, level=log_level.value)
 
     readme_paths = glob.glob("**/*.md", recursive=True)
