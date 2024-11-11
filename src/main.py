@@ -8,15 +8,17 @@ from src.code_embedding import CodeEmbedder
 from src.script_content_reader import ScriptContentReader
 from src.script_metadata_extractor import ScriptMetadataExtractor
 
-app = typer.Typer()
-
 logger.remove()
 logger.add(sys.stderr, level="ERROR")
+
+app = typer.Typer(rich_markup_mode=None)
 
 
 @app.command(help="Embed code from scripts to markdown files.")
 def run(
-    all_files: bool = typer.Option(False, help="Process all files in the repository."),
+    all_files: bool = typer.Option(
+        False, "--all-files", help="Process all files in the repository."
+    ),
     changed_files: list[str] = typer.Argument(None, help="List of changed files to process."),
 ):
     readme_paths = glob.glob("**/*.md", recursive=True)
@@ -41,4 +43,4 @@ def run(
 
 
 if __name__ == "__main__":
-    typer.run(run)
+    app()
