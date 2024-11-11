@@ -18,6 +18,7 @@ class ScriptContentReader:
 
     def read(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
         scripts_with_full_contents = self._read_full_script(scripts)
+
         return self._process_scripts(scripts_with_full_contents)
 
     def _read_full_script(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
@@ -27,11 +28,10 @@ class ScriptContentReader:
             try:
                 with open(script.path) as script_file:
                     script.content = script_file.read()
-
-                scripts_with_full_contents.append(script)
+                    scripts_with_full_contents.append(script)
 
             except FileNotFoundError:
-                logger.error(f"File {script.path} not found. Skipping.")
+                raise FileNotFoundError(f"File {script.path} not found.")
 
         return scripts_with_full_contents
 
