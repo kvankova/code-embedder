@@ -8,12 +8,12 @@ license = "MIT"
 packages = [{include = "src"}]
 
 [tool.poetry.scripts]
-code-embedder = "src.main:app"
+code-embedder = "src.main:run"
 
 [tool.poetry.dependencies]
 python = "^3.11"
 loguru = "^0.7.2"
-typer = "^0.13.0"
+typer-slim = "^0.13.0"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"
