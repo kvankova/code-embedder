@@ -3,13 +3,17 @@ name = "code-embedder"
 version = "v0.5.2"
 description = "Embed python code from script to markdown"
 authors = ["Katerina Vankova <katerinavankova1@gmail.com>"]
+readme = "README.md"
 license = "MIT"
 packages = [{include = "src"}]
 
+[tool.poetry.scripts]
+code-embedder = "src.main:app"
+
 [tool.poetry.dependencies]
 python = "^3.11"
-argparse = "^1.4.0"
 loguru = "^0.7.2"
+typer-slim = "^0.13.0"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"

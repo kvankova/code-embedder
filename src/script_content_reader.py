@@ -2,8 +2,6 @@ import ast
 import re
 from typing import Protocol
 
-from loguru import logger
-
 from src.script_metadata import ScriptMetadata
 
 
@@ -18,6 +16,7 @@ class ScriptContentReader:
 
     def read(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
         scripts_with_full_contents = self._read_full_script(scripts)
+
         return self._process_scripts(scripts_with_full_contents)
 
     def _read_full_script(self, scripts: list[ScriptMetadata]) -> list[ScriptMetadata]:
@@ -27,11 +26,10 @@ class ScriptContentReader:
             try:
                 with open(script.path) as script_file:
                     script.content = script_file.read()
-
-                scripts_with_full_contents.append(script)
+                    scripts_with_full_contents.append(script)
 
             except FileNotFoundError:
-                logger.error(f"Error: {script.path} not found. Skipping.")
+                raise FileNotFoundError(f"File {script.path} not found.")
 
         return scripts_with_full_contents
 
@@ -71,14 +69,17 @@ class ScriptContentReader:
             start, end = self._extract_section_part(
                 lines=lines, section=script.extraction_part
             )
-            if not self._validate_section_bounds(start, end, script):
-                return ""
 
-        if not start and not end:
-            logger.error(
-                f"Part {script.extraction_part} not found in {script.path}. Skipping."
-            )
-            return ""
+        if not start or not end:
+            if script.extraction_type == "object":
+                raise ValueError(
+                    f"Object {script.extraction_part} not found in {script.path}. "
+                )
+            elif script.extraction_type == "section":
+                raise ValueError(
+                    f"Part {script.extraction_part} not found in {script.path}. "
+                    "Either start and/or end of the section is missing."
+                )
 
         return "\n".join(lines[start:end])
 
@@ -116,22 +117,3 @@ class ScriptContentReader:
                 return start, i
 
         return None, None
-
-    def _validate_section_bounds(
-        self, start: int | None, end: int | None, script: ScriptMetadata
-    ) -> bool:
-        if not start:
-            logger.error(
-                f"Start of section {script.extraction_part} not found in {script.path}. "
-                "Skipping."
-            )
-            return False
-
-        if not end:
-            logger.error(
-                f"End of section {script.extraction_part} not found in {script.path}. "
-                "Skipping."
-            )
-            return False
-
-        return True

@@ -1,24 +1,46 @@
-import argparse
+import glob
+import sys
 
+import typer
 from loguru import logger
 
 from src.code_embedding import CodeEmbedder
 from src.script_content_reader import ScriptContentReader
 from src.script_metadata_extractor import ScriptMetadataExtractor
 
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    "--readme-paths", nargs="+", type=str, help="Paths to Readme files", default="README.md"
-)
-args = parser.parse_args()
+logger.remove()
+logger.add(sys.stderr, level="ERROR")
 
-if __name__ == "__main__":
+app = typer.Typer(rich_markup_mode=None)
+
+
+@app.command(help="Embed code from scripts to markdown files.")
+def run(
+    all_files: bool = typer.Option(
+        False, "--all-files", help="Process all files in the repository."
+    ),
+    changed_files: list[str] = typer.Argument(None, help="List of changed files to process."),
+):
+    readme_paths = glob.glob("**/*.md", recursive=True)
+
+    if not readme_paths:
+        logger.info("No markdown files found in the current repository.")
+        exit(0)
+
     script_metadata_extractor = ScriptMetadataExtractor()
     script_content_reader = ScriptContentReader()
+    files = changed_files if not all_files else None  # None for all files
+
     code_embedder = CodeEmbedder(
-        readme_paths=args.readme_paths,
+        readme_paths=readme_paths,
+        changed_files=files,
         script_metadata_extractor=script_metadata_extractor,
         script_content_reader=script_content_reader,
     )
+
     code_embedder()
     logger.info("Code Embedder finished successfully.")
+
+
+if __name__ == "__main__":
+    app()

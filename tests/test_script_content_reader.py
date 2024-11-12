@@ -91,24 +91,17 @@ def test_read_full_script(script: ScriptMetadata, expected_script: ScriptMetadat
     assert script_content_reader._read_full_script([script]) == [expected_script]
 
 
+def test_read_full_script_unknown_path() -> None:
+    script_content_reader = ScriptContentReader()
+    with pytest.raises(FileNotFoundError):
+        script_content_reader._read_full_script(
+            [create_script_metadata(path="unknown_path.py")]
+        )
+
+
 @pytest.mark.parametrize(
     "script_metadata, expected_script_metadata",
     [
-        # Missing section
-        (
-            create_script_metadata(
-                path="tests/data/example.py",
-                extraction_part="no_section",
-                extraction_type="section",
-                content='print("Hello, World! from script")\n',
-            ),
-            create_script_metadata(
-                path="tests/data/example.py",
-                extraction_part="no_section",
-                extraction_type="section",
-                content="",
-            ),
-        ),
         # Section
         (
             create_script_metadata(
@@ -203,7 +196,7 @@ def test_read_full_script(script: ScriptMetadata, expected_script: ScriptMetadat
             ),
         ),
     ],
-    ids=["missing_section", "section", "object", "object_class"],
+    ids=["section", "object", "object_class"],
 )
 def test_read_script_section(
     script_metadata: ScriptMetadata, expected_script_metadata: ScriptMetadata
@@ -213,3 +206,37 @@ def test_read_script_section(
     assert script_content_reader._update_script_content_with_extraction_part(
         [script_metadata]
     ) == [expected_script_metadata]
+
+
+@pytest.mark.parametrize(
+    "script_metadata, error_message",
+    [
+        # Unknown section
+        (
+            create_script_metadata(
+                path="tests/data/example.py",
+                extraction_part="no_section",
+                extraction_type="section",
+                content='print("Hello, World! from script")\n',
+            ),
+            "Part no_section not found in tests/data/example.py. "
+            "Either start and/or end of the section is missing.",
+        ),
+        # Unknown object
+        (
+            create_script_metadata(
+                path="tests/data/example.py",
+                extraction_part="no_object",
+                extraction_type="object",
+            ),
+            "Object no_object not found in tests/data/example.py. ",
+        ),
+    ],
+    ids=["unknown_section", "unknown_object"],
+)
+def test_read_script_unknown_extraction_part(
+    script_metadata: ScriptMetadata, error_message: str
+) -> None:
+    script_content_reader = ScriptContentReader()
+    with pytest.raises(ValueError, match=error_message):
+        script_content_reader._update_script_content_with_extraction_part([script_metadata])

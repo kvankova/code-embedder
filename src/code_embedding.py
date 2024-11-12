@@ -9,26 +9,35 @@ class CodeEmbedder:
     def __init__(
         self,
         readme_paths: list[str],
+        changed_files: list[str] | None,
         script_metadata_extractor: ScriptMetadataExtractorInterface,
         script_content_reader: ScriptContentReaderInterface,
     ) -> None:
         self._readme_paths = readme_paths
+        self._changed_files = changed_files
         self._script_metadata_extractor = script_metadata_extractor
         self._script_content_reader = script_content_reader
 
     def __call__(self) -> None:
         for readme_path in self._readme_paths:
-            self._process_readme(readme_path)
+            self._process_readme(readme_path=readme_path)
 
     def _process_readme(self, readme_path: str) -> None:
         readme_content = self._read_readme(readme_path)
         if not readme_content:
-            logger.info(f"Empty README in path {readme_path}. Skipping.")
+            logger.info(f"Empty markdown file {readme_path}. Skipping.")
             return
 
         scripts = self._extract_scripts(readme_content=readme_content, readme_path=readme_path)
+
         if not scripts:
             return
+
+        if self._changed_files:
+            # Reduce scripts to only the ones that have changed only when there were no changes
+            # to the readme file
+            if readme_path not in self._changed_files:
+                scripts = [script for script in scripts if script.path in self._changed_files]
 
         script_contents = self._script_content_reader.read(scripts=scripts)
 
@@ -40,7 +49,6 @@ class CodeEmbedder:
 
     def _read_readme(self, readme_path: str) -> list[str]:
         if not readme_path.endswith(".md"):
-            logger.error("README path must end with .md")
             raise ValueError("README path must end with .md")
 
         with open(readme_path) as readme_file:
@@ -51,10 +59,10 @@ class CodeEmbedder:
     ) -> list[ScriptMetadata] | None:
         scripts = self._script_metadata_extractor.extract(readme_content=readme_content)
         if not scripts:
-            logger.info(f"No script paths found in README in path {readme_path}. Skipping.")
+            logger.debug(f"No script paths found in README in path {readme_path}. Skipping.")
             return None
         logger.info(
-            f"""Found script paths in README in path {readme_path}:
+            f"""Found script paths in {readme_path}:
             {set(script.path for script in scripts)}"""
         )
         return scripts
