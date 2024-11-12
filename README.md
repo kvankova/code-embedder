@@ -112,7 +112,6 @@ Your `.pre-commit-config.yaml` file should look like this:
       name: Code embedder
       entry: code-embedder run
       language: python
-      types: [markdown]
 ```
 
 ### B. Direct repository reference
@@ -125,7 +124,6 @@ Alternatively, you can reference the repository directly in your `.pre-commit-co
       name: Code embedder
       entry: code-embedder run
       language: python
-      types: [markdown]
 ```
 
 ### 🔧 Options
