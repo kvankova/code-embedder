@@ -2,8 +2,8 @@ from typing import Literal
 
 import pytest
 
-from src.script_metadata import ScriptMetadata
-from src.script_metadata_extractor import ScriptMetadataExtractor
+from code_embedder.script_metadata import ScriptMetadata
+from code_embedder.script_metadata_extractor import ScriptMetadataExtractor
 
 
 def create_script_metadata(

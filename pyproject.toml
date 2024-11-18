@@ -5,10 +5,9 @@ description = "Embed python code from script to markdown"
 authors = ["Katerina Vankova <katerinavankova1@gmail.com>"]
 readme = "README.md"
 license = "MIT"
-packages = [{include = "src"}]
 
 [tool.poetry.scripts]
-code-embedder = "src.main:app"
+code-embedder = "code_embedder.main:app"
 
 [tool.poetry.dependencies]
 python = "^3.11"
