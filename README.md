@@ -85,7 +85,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref }}
 
       - name: Run code embedder
-        uses: kvankova/code-embedder@v1.0.1
+        uses: kvankova/code-embedder@v1.0.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -101,7 +101,7 @@ You can set up **Code Embedder** as a pre-commit hook using either:
 ### A. Installation via PyPI
 Install the package:
 ```bash
-pip install code-embedder==v1.0.1
+pip install code-embedder==v1.0.2
 ```
 
 Your `.pre-commit-config.yaml` file should look like this:
@@ -118,7 +118,7 @@ Your `.pre-commit-config.yaml` file should look like this:
 Alternatively, you can reference the repository directly in your `.pre-commit-config.yaml` file:
 ```yaml
 - repo: https://github.com/kvankova/code-embedder
-  rev: v1.0.1
+  rev: v1.0.2
   hooks:
     - id: code-embedder
       name: Code embedder
