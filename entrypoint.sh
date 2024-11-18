@@ -19,7 +19,7 @@ fi
 if [ -n "$(git status -s)" ]; then
 
     echo "Changes to commit..."
-    git add $README_PATHS
+    git add .
     git diff --staged
     git commit -m "docs: Apply Code Embedder"
     git push origin ${BRANCH_NAME}
