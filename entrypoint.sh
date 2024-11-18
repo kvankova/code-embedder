@@ -8,9 +8,9 @@ BRANCH_NAME=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
 
 git pull origin ${BRANCH_NAME}
 
-echo "Searching for code snippets in $README_PATHS..."
+echo "Searching for code snippets..."
 
-poetry run python /app/src/main.py
+poetry run python /app/code_embedder/main.py
 
 if [ $? -ne 0 ]; then
     exit 1
