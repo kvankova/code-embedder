@@ -1,8 +1,8 @@
 from loguru import logger
 
-from src.script_content_reader import ScriptContentReaderInterface
-from src.script_metadata import ScriptMetadata
-from src.script_metadata_extractor import ScriptMetadataExtractorInterface
+from code_embedder.script_content_reader import ScriptContentReaderInterface
+from code_embedder.script_metadata import ScriptMetadata
+from code_embedder.script_metadata_extractor import ScriptMetadataExtractorInterface
 
 
 class CodeEmbedder:

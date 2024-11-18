@@ -4,9 +4,9 @@ import sys
 import typer
 from loguru import logger
 
-from src.code_embedding import CodeEmbedder
-from src.script_content_reader import ScriptContentReader
-from src.script_metadata_extractor import ScriptMetadataExtractor
+from code_embedder.code_embedding import CodeEmbedder
+from code_embedder.script_content_reader import ScriptContentReader
+from code_embedder.script_metadata_extractor import ScriptMetadataExtractor
 
 logger.remove()
 logger.add(sys.stderr, level="ERROR")

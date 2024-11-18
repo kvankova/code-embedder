@@ -1,7 +1,7 @@
 import re
 from typing import Protocol
 
-from src.script_metadata import ScriptMetadata
+from code_embedder.script_metadata import ScriptMetadata
 
 
 class ScriptMetadataExtractorInterface(Protocol):
