@@ -1,6 +1,6 @@
 import ast
 import re
-from typing import Protocol
+from typing import Optional, Protocol
 
 from code_embedder.script_metadata import ScriptMetadata
 
@@ -83,7 +83,9 @@ class ScriptContentReader:
 
         return "\n".join(lines[start:end])
 
-    def _extract_object_part(self, script: ScriptMetadata) -> tuple[int | None, int | None]:
+    def _extract_object_part(
+        self, script: ScriptMetadata
+    ) -> tuple[Optional[int], Optional[int]]:
         tree = ast.parse(script.content)
 
         for node in ast.walk(tree):
@@ -100,8 +102,8 @@ class ScriptContentReader:
         return None, None
 
     def _extract_section_part(
-        self, lines: list[str], section: str | None = None
-    ) -> tuple[int | None, int | None]:
+        self, lines: list[str], section: Optional[str] = None
+    ) -> tuple[Optional[int], Optional[int]]:
         if not section:
             return None, None
 

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from loguru import logger
 
 from code_embedder.script_content_reader import ScriptContentReaderInterface
@@ -9,7 +11,7 @@ class CodeEmbedder:
     def __init__(
         self,
         readme_paths: list[str],
-        changed_files: list[str] | None,
+        changed_files: Optional[list[str]],
         script_metadata_extractor: ScriptMetadataExtractorInterface,
         script_content_reader: ScriptContentReaderInterface,
     ) -> None:
@@ -56,7 +58,7 @@ class CodeEmbedder:
 
     def _extract_scripts(
         self, readme_content: list[str], readme_path: str
-    ) -> list[ScriptMetadata] | None:
+    ) -> Optional[list[ScriptMetadata]]:
         scripts = self._script_metadata_extractor.extract(readme_content=readme_content)
         if not scripts:
             logger.debug(f"No script paths found in README in path {readme_path}. Skipping.")

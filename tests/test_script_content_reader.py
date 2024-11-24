@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 
 import pytest
 
@@ -9,7 +9,7 @@ from code_embedder.script_metadata import ScriptMetadata
 def create_script_metadata(
     path: str,
     extraction_type: Literal["full", "section", "object"] = "full",
-    extraction_part: str | None = None,
+    extraction_part: Optional[str] = None,
     content: str = "",
 ) -> ScriptMetadata:
     return ScriptMetadata(

@@ -10,7 +10,7 @@ license = "MIT"
 code-embedder = "code_embedder.main:app"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
 loguru = "^0.7.2"
 typer-slim = "^0.13.0"
 
@@ -27,5 +27,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 95
-lint.select = ["E", "F", "I", "BLE", "UP", "FA"]
-target-version = "py311"
+lint.select = ["E", "F", "I", "BLE", "UP"]
+target-version = "py39"
