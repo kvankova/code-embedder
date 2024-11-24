@@ -27,5 +27,5 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 95
-lint.select = ["E", "F", "I", "BLE", "UP", "FA"]
-target-version = "py311"
+lint.select = ["E", "F", "I", "BLE", "UP"]
+target-version = "py39"

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 
 import pytest
 
@@ -11,7 +11,7 @@ def create_script_metadata(
     readme_end: int,
     path: str,
     extraction_type: Literal["section", "object", "full"] = "full",
-    extraction_part: str | None = None,
+    extraction_part: Optional[str] = None,
     content: str = "",
 ) -> ScriptMetadata:
     return ScriptMetadata(
