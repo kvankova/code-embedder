@@ -1,5 +1,5 @@
 import re
-from typing import Protocol
+from typing import Optional, Protocol
 
 from code_embedder.script_metadata import ScriptMetadata
 
@@ -40,7 +40,7 @@ class ScriptMetadataExtractor:
     def _is_code_block_end(self, line: str) -> bool:
         return line.strip() == self._code_block_end
 
-    def _start_new_block(self, line: str, row: int) -> dict | None:
+    def _start_new_block(self, line: str, row: int) -> Optional[dict]:
         tag_items = line.split(self._path_separator)
         path = tag_items[1].strip()
         extraction_type = tag_items[2].strip() if len(tag_items) > 2 else "full"
