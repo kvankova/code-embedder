@@ -10,7 +10,7 @@ license = "MIT"
 code-embedder = "code_embedder.main:app"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.9"
 loguru = "^0.7.2"
 typer-slim = "^0.13.0"
 
