@@ -10,7 +10,7 @@ git pull origin ${BRANCH_NAME}
 
 echo "Searching for code snippets..."
 
-poetry run python /app/code_embedder/main.py
+python /app/code_embedder/main.py
 
 if [ $? -ne 0 ]; then
     exit 1
