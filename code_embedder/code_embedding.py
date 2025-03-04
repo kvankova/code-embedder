@@ -53,7 +53,7 @@ class CodeEmbedder:
         if not readme_path.endswith(".md"):
             raise ValueError("README path must end with .md")
 
-        with open(readme_path) as readme_file:
+        with open(readme_path, encoding="utf-8") as readme_file:
             return readme_file.readlines()
 
     def _extract_scripts(
@@ -86,5 +86,5 @@ class CodeEmbedder:
 
         updated_readme += readme_content[readme_content_cursor:]
 
-        with open(readme_path, "w") as readme_file:
+        with open(readme_path, "w", encoding="utf-8") as readme_file:
             readme_file.writelines(updated_readme)
