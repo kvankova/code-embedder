@@ -24,7 +24,7 @@ class ScriptContentReader:
 
         for script in scripts:
             try:
-                with open(script.path) as script_file:
+                with open(script.path, encoding="utf-8") as script_file:
                     script.content = script_file.read()
                     scripts_with_full_contents.append(script)
 

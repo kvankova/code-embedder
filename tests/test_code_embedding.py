@@ -43,7 +43,7 @@ def test_code_embedder(
 ) -> None:
     # Create a temporary copy of the original file
     temp_readme_path = tmp_path / "readme.md"
-    with open(before_code_embedding_path) as readme_file:
+    with open(before_code_embedding_path, encoding="utf-8") as readme_file:
         temp_readme_path.write_text(readme_file.read())
 
     code_embedder = CodeEmbedder(
@@ -55,10 +55,10 @@ def test_code_embedder(
 
     code_embedder()
 
-    with open(after_code_embedding_path) as expected_file:
+    with open(after_code_embedding_path, encoding="utf-8") as expected_file:
         expected_readme_content = expected_file.readlines()
 
-    with open(temp_readme_path) as updated_file:
+    with open(temp_readme_path, encoding="utf-8") as updated_file:
         updated_readme_content = updated_file.readlines()
 
     assert updated_readme_content == expected_readme_content
