@@ -109,9 +109,7 @@ Your `.pre-commit-config.yaml` file should look like this:
 - repo: local
   hooks:
     - id: code-embedder
-      name: Code embedder
       entry: code-embedder run
-      language: system
 ```
 
 ### B. Direct repository reference
@@ -121,9 +119,7 @@ Alternatively, you can reference the repository directly in your `.pre-commit-co
   rev: v1.1.2
   hooks:
     - id: code-embedder
-      name: Code embedder
       entry: code-embedder run
-      language: system
 ```
 
 ### 🔧 Options
